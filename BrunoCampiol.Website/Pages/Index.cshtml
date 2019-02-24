@@ -1,0 +1,81 @@
+﻿@page
+@model IndexModel
+
+<h1 class="responsive-title text-center">
+    Bruno - Software Develper
+</h1>
+<p class="text-center">
+    I'm a software developer with experience in .Net based in Brazil. I'm always learning and love coding.
+</p>
+<p class="text-center">
+    Interested in working together? Let's have a talk: <a href="https://www.linkedin.com/in/bruno-paes-a9629651/"><i class="fab fa-linkedin"></i></a>
+</p>
+<p class="text-center">
+    We have been around 3 years up now moving to ASP. Net Core (and Bootstrap 4 / FontAwesome). Thanks for visiting! The source code is now on <a href="https://github.com/brunocampiol/BrunoCampiol">GitHub</a>. <i class="fab fa-github"></i>
+</p>
+<div class="row">
+    <div class="col-12 col-sm-4 mb-4">
+        <div class="card">
+            <img class="card-img-top img-fluid" src="~/images/box2dengine.jpg" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Box 2d Javascript engine</h5>
+                <p class="card-text">Simple javascript engine for 2d objects simulation</p>
+                <a class="btn btn-secondary btn-block" asp-page="/Projects/Box2D">Check it out</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-4 mb-4">
+        <div class="card">
+            <img class="card-img-top img-fluid" src="~/images/flashfull.png" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Tiny flashlight for android</h5>
+                <p class="card-text">Long time ago, when android didnt have flashlight by default</p>
+                <a class="btn btn-secondary btn-block" asp-page="/Projects/FlashApp">Check it out</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-4 mb-4">
+        <div class="card">
+            <img class="card-img-top img-fluid" src="~/images/pigif.gif" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">π Calculation in Javascript</h5>
+                <p class="card-text">How long can your browser calculate π? Find here</p>
+                <a class="btn btn-secondary btn-block" asp-page="/Projects/PiCalc">Check it out</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*<div class="card-deck home-card-deck">
+    <div class="card">
+        <img class="card-img-top img-fluid" src="~/images/box2dengine.jpg" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Box 2d javascript engine</h5>
+            <p class="card-text">Simple javascript engine for 2d objects simulation</p>
+            <a class="btn btn-secondary btn-block" asp-page="/Projects/Box2D">Check it out</a>
+        </div>
+    </div>
+    <div class="card">
+        <img class="card-img-top img-fluid" src="~/images/flashfull.png" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Tiny flashlight for android</h5>
+            <p class="card-text">Long time ago, when android didnt have flashlight by default</p>
+            <a class="btn btn-secondary btn-block" asp-page="/Projects/FlashApp">Check it out</a>
+        </div>
+    </div>
+</div>*@
+<br />
+<p class="text-center">
+    This page is a valid HTML5. You can check it by clicking <a href="http://validator.w3.org/check?uri=http%3A%2F%2Fbrunocampiol.tk">here</a>
+    <img src="~/images/html5_valid.png" alt="html5 valid" class="img-fluid">
+</p>
+<p class="text-center">
+    Donate to help me do more research! <i class="fab fa-cc-paypal"></i>
+</p>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="text-center">
+    <input type="hidden" name="cmd" value="_s-xclick">
+    <input type="hidden" name="hosted_button_id" value="XGG7ZLEDPMQZ4">
+    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online!" class="center">
+    <img alt="" src="https://www.paypalobjects.com/pt_BR/i/scr/pixel.gif" width="1" height="1" style="border:none;">
+</form>

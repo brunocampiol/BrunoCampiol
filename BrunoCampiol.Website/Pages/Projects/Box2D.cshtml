@@ -1,0 +1,71 @@
+﻿@page
+
+<style>
+    #canvas {
+        /*
+        padding: 0;
+        margin: 0;
+        border: 1px solid white;
+        position:absolute;*/
+        background-color: #708090;
+    }
+</style>
+
+<h1 class="responsive-title text-center">Javascript physics engine</h1>
+
+<p>
+    Still have some bugs - Have to work with resizing for mobile applications
+</p>
+
+<p>
+    I've used the Box2D javascript import from C++. You can find more information here: <a href="http://box2d.org/">http://box2d.org/</a>
+</p>
+
+<br />
+
+<div class="panel panel-default">
+    <p class="responsive-subtitle">
+        Settings
+    </p>
+    <br />
+    <label class="radio-inline control-label">
+        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+        <i class="text-secondary">Drop type:</i>
+    </label>
+    <label class="radio-inline"><input type="radio" value="0" name="dropType" checked="checked"> Circle</label>
+    <label class="radio-inline"><input type="radio" value="1" name="dropType"> Squares</label>
+    <hr />
+    <label class="radio-inline control-label">
+        <span class="glyphicon glyphicon-certificate" aria-hidden="true"></span>
+        <i class="text-secondary">Drop quantity:</i>
+    </label>
+    <label class="radio-inline"><input type="radio" value="1" name="dropQuantity" checked="checked"> Single drop <span class="badge badge-light">1</span></label>
+    <label class="radio-inline"><input type="radio" value="5" name="dropQuantity"> Multi drop <span class="badge badge-light">5</span></label>
+    <label class="radio-inline"><input type="radio" value="15" name="dropQuantity"> Super drop <span class="badge badge-light">15</span></label>
+    <label class="radio-inline"><input type="radio" value="35" name="dropQuantity"> Ultra drop <span class="badge badge-light">35</span></label>
+    <label class="radio-inline"><input type="radio" value="50" name="dropQuantity"> Insane drop <span class="badge badge-light">50</span></label>
+    <hr />
+    <label class="radio-inline control-label">
+        <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+        <i class="text-secondary">Change World:</i>
+    </label>
+    <button type="button" class="btn btn-secondary btn-sm" onclick="setupNextWorld()">Next</button>
+    <br />
+    <br />
+</div>
+
+<br />
+<br />
+
+<div class="panel panel-default">
+    <div class="panel-body text-center">
+        <canvas id="canvas" class="border-dark" width="800" height="500"></canvas>
+    </div>
+</div>
+
+<br />
+<br />
+
+<!--[if IE]><script type="text/javascript" src="~lib/box2d/lib/excanvas.js"></script><![endif]-->
+<script src="~/lib/box2d/lib/prototype-1.6.0.2.js"></script>
+<script src='~/min/box2d.min.js'></script>

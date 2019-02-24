@@ -1,0 +1,120 @@
+﻿// Configure bundling and minification for the project.
+// More info at https://go.microsoft.com/fwlink/?LinkId=808241
+[
+  {
+    "outputFileName": "wwwroot/min/site.min.css",
+    // An array of relative input file paths. Globbing patterns supported
+    "inputFiles": [
+      "wwwroot/css/site.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/min/site.min.js",
+    "inputFiles": [
+      "wwwroot/js/site.js"
+    ],
+    // Optionally specify minification options
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    // Optionally generate .map file
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/min/piCalculator.min.js",
+    "inputFiles": [
+      "wwwroot/js/piCalculator.js"
+    ],
+    // Optionally specify minification options
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    // Optionally generate .map file
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/min/box2d.min.js",
+    "inputFiles": [
+      "wwwroot/lib/box2d/js/box2d/common/b2Settings.js",
+      "wwwroot/lib/box2d/js/box2d/common/math/b2Vec2.js",
+      "wwwroot/lib/box2d/js/box2d/common/math/b2Mat22.js",
+      "wwwroot/lib/box2d/js/box2d/common/math/b2Math.js",
+      "wwwroot/lib/box2d/js/box2d/collision/b2AABB.js",
+      "wwwroot/lib/box2d/js/box2d/collision/b2Bound.js",
+      "wwwroot/lib/box2d/js/box2d/collision/b2BoundValues.js",
+      "wwwroot/lib/box2d/js/box2d/collision/b2Pair.js",
+      "wwwroot/lib/box2d/js/box2d/collision/b2PairCallback.js",
+      "wwwroot/lib/box2d/js/box2d/collision/b2BufferedPair.js",
+      "wwwroot/lib/box2d/js/box2d/collision/b2PairManager.js",
+      "wwwroot/lib/box2d/js/box2d/collision/b2BroadPhase.js",
+      "wwwroot/lib/box2d/js/box2d/collision/b2Collision.js",
+      "wwwroot/lib/box2d/js/box2d/collision/Features.js",
+      "wwwroot/lib/box2d/js/box2d/collision/b2ContactID.js",
+      "wwwroot/lib/box2d/js/box2d/collision/b2ContactPoint.js",
+      "wwwroot/lib/box2d/js/box2d/collision/b2Distance.js",
+      "wwwroot/lib/box2d/js/box2d/collision/b2Manifold.js",
+      "wwwroot/lib/box2d/js/box2d/collision/b2OBB.js",
+      "wwwroot/lib/box2d/js/box2d/collision/b2Proxy.js",
+      "wwwroot/lib/box2d/js/box2d/collision/ClipVertex.js",
+      "wwwroot/lib/box2d/js/box2d/collision/shapes/b2Shape.js",
+      "wwwroot/lib/box2d/js/box2d/collision/shapes/b2ShapeDef.js",
+      "wwwroot/lib/box2d/js/box2d/collision/shapes/b2BoxDef.js",
+      "wwwroot/lib/box2d/js/box2d/collision/shapes/b2CircleDef.js",
+      "wwwroot/lib/box2d/js/box2d/collision/shapes/b2CircleShape.js",
+      "wwwroot/lib/box2d/js/box2d/collision/shapes/b2MassData.js",
+      "wwwroot/lib/box2d/js/box2d/collision/shapes/b2PolyDef.js",
+      "wwwroot/lib/box2d/js/box2d/collision/shapes/b2PolyShape.js",
+      "wwwroot/lib/box2d/js/box2d/dynamics/b2Body.js",
+      "wwwroot/lib/box2d/js/box2d/dynamics/b2BodyDef.js",
+      "wwwroot/lib/box2d/js/box2d/dynamics/b2CollisionFilter.js",
+      "wwwroot/lib/box2d/js/box2d/dynamics/b2Island.js",
+      "wwwroot/lib/box2d/js/box2d/dynamics/b2TimeStep.js",
+      "wwwroot/lib/box2d/js/box2d/dynamics/contacts/b2ContactNode.js",
+      "wwwroot/lib/box2d/js/box2d/dynamics/contacts/b2Contact.js",
+      "wwwroot/lib/box2d/js/box2d/dynamics/contacts/b2ContactConstraint.js",
+      "wwwroot/lib/box2d/js/box2d/dynamics/contacts/b2ContactConstraintPoint.js",
+      "wwwroot/lib/box2d/js/box2d/dynamics/contacts/b2ContactRegister.js",
+      "wwwroot/lib/box2d/js/box2d/dynamics/contacts/b2ContactSolver.js",
+      "wwwroot/lib/box2d/js/box2d/dynamics/contacts/b2CircleContact.js",
+      "wwwroot/lib/box2d/js/box2d/dynamics/contacts/b2Conservative.js",
+      "wwwroot/lib/box2d/js/box2d/dynamics/contacts/b2NullContact.js",
+      "wwwroot/lib/box2d/js/box2d/dynamics/contacts/b2PolyAndCircleContact.js",
+      "wwwroot/lib/box2d/js/box2d/dynamics/contacts/b2PolyContact.js",
+      "wwwroot/lib/box2d/js/box2d/dynamics/b2ContactManager.js",
+      "wwwroot/lib/box2d/js/box2d/dynamics/b2World.js",
+      "wwwroot/lib/box2d/js/box2d/dynamics/b2WorldListener.js",
+      "wwwroot/lib/box2d/js/box2d/dynamics/joints/b2JointNode.js",
+      "wwwroot/lib/box2d/js/box2d/dynamics/joints/b2Joint.js",
+      "wwwroot/lib/box2d/js/box2d/dynamics/joints/b2JointDef.js",
+      "wwwroot/lib/box2d/js/box2d/dynamics/joints/b2DistanceJoint.js",
+      "wwwroot/lib/box2d/js/box2d/dynamics/joints/b2DistanceJointDef.js",
+      "wwwroot/lib/box2d/js/box2d/dynamics/joints/b2Jacobian.js",
+      "wwwroot/lib/box2d/js/box2d/dynamics/joints/b2GearJoint.js",
+      "wwwroot/lib/box2d/js/box2d/dynamics/joints/b2GearJointDef.js",
+      "wwwroot/lib/box2d/js/box2d/dynamics/joints/b2MouseJoint.js",
+      "wwwroot/lib/box2d/js/box2d/dynamics/joints/b2MouseJointDef.js",
+      "wwwroot/lib/box2d/js/box2d/dynamics/joints/b2PrismaticJoint.js",
+      "wwwroot/lib/box2d/js/box2d/dynamics/joints/b2PrismaticJointDef.js",
+      "wwwroot/lib/box2d/js/box2d/dynamics/joints/b2PulleyJoint.js",
+      "wwwroot/lib/box2d/js/box2d/dynamics/joints/b2PulleyJointDef.js",
+      "wwwroot/lib/box2d/js/box2d/dynamics/joints/b2RevoluteJoint.js",
+      "wwwroot/lib/box2d/js/box2d/dynamics/joints/b2RevoluteJointDef.js",
+      "wwwroot/lib/box2d/demos/demo_base.js",
+      "wwwroot/lib/box2d/demos/top.js",
+      "wwwroot/lib/box2d/demos/stack.js",
+      "wwwroot/lib/box2d/demos/compound.js",
+      "wwwroot/lib/box2d/demos/pendulum.js",
+      "wwwroot/lib/box2d/demos/crank.js",
+      "wwwroot/lib/box2d/demos/demos.js"
+    ],
+    // Optionally specify minification options
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    // Optionally generate .map file
+    "sourceMap": false
+  }
+]

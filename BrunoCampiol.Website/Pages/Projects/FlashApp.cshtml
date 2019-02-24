@@ -1,0 +1,473 @@
+﻿@page
+
+<h1 class="responsive-title text-center">Creating the application</h1>
+
+<p>
+    As an alternative, you can pick directly the main files of the application:
+</p>
+
+<ul>
+    <li>
+        MainActivity.java
+    </li>
+    <li>
+        CameraPreview.java
+    </li>
+    <li>
+        activity_main.xml
+    </li>
+    <li>
+        AndroidManifest.xml
+    </li>
+</ul>
+
+<p>
+    Use this code for the MainActivity.java
+</p>
+
+<div class="p-1 border border-secondary bg-light">
+    <code>
+        // Criado por Bruno Paes - Outubro 2012
+        // Codigo livre, sinta-se livre para modificar
+        package com.lanterna;
+        import java.util.List;
+        import com.activitie.R;
+        import android.os.Bundle;
+        import android.app.Activity;
+        import android.app.AlertDialog;
+        import android.content.DialogInterface;
+        import android.content.pm.PackageManager;
+        import android.hardware.Camera;
+        import android.hardware.Camera.Parameters;
+        import android.text.Html;
+        import android.text.method.LinkMovementMethod;
+        import android.view.Menu;
+        import android.view.MenuItem;
+        import android.view.View;
+        import android.view.View.OnClickListener;
+        import android.view.WindowManager;
+        import android.widget.Button;
+        import android.widget.FrameLayout;
+        import android.widget.TextView;
+        import android.widget.Toast;
+        public class MainActivity extends Activity
+        {
+        // Private variables
+        //final private static String TAG = "MainActivity";
+        private Camera mCamera = null;
+        private CameraPreview mPreview = null;
+        private boolean status = false;
+
+        // custom methods
+
+        /** A safe way to get an instance of the Camera object */
+        public static Camera getCameraInstance() throws Exception
+        {
+        Camera c = null;
+        try
+        {
+        c = Camera.open(); // attempt to get a Camera instance
+        }
+        catch (Exception e)
+        {
+        throw e; // Camera is not available (in use or does not exist)
+        }
+        return c; // returns null if camera is unavailable
+        }
+
+        private void turnLightOn() throws Exception
+        {
+
+        mCamera = getCameraInstance();
+
+        Parameters parameters = mCamera.getParameters();
+
+        if (parameters == null)
+        throw new Exception("Camera Parameters Null");
+
+        List<string>
+            flashModes = parameters.getSupportedFlashModes();
+
+            // Check if camera flash exists
+            if (flashModes == null)
+            throw new Exception("Camera Parameters getSupportedFlashModes Null");
+
+            if (!flashModes.contains(Parameters.FLASH_MODE_TORCH))
+            throw new Exception("Camera nao suporta flash");
+
+
+            parameters.setFlashMode(Parameters.FLASH_MODE_TORCH);
+            mCamera.setParameters(parameters);
+
+            //Create our Preview view and set it as the content of our activity.
+            mPreview = new CameraPreview(this, mCamera);
+            FrameLayout preview = (FrameLayout) findViewById(R.id.sPreview);
+            preview.addView(mPreview);
+
+            // deixa screen on
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+            ((TextView)findViewById(R.id.tStatus)).setText(R.string.status_on);
+            ((TextView)findViewById(R.id.tStatus)).setTextColor(0xFFFFFFFF); //white
+            status = true;
+
+
+            }
+
+            private void turnLightOff() throws Exception
+            {
+            // Remove previews so wont run CPU
+            FrameLayout preview = (FrameLayout) findViewById(R.id.sPreview);
+            preview.removeAllViews();
+
+            // Libera a camera
+            if (mCamera != null)
+            mCamera.release();
+
+            // Troca o texto do layout
+            ((TextView)findViewById(R.id.tStatus)).setText(R.string.status_off);
+            ((TextView)findViewById(R.id.tStatus)).setTextColor(0xff444444); // black
+
+            // Seta var
+            status = false;
+            }
+
+            // activity methods
+
+            &commat;Override
+            protected void onCreate(Bundle savedInstanceState)
+            {
+
+            try
+            {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
+            this.setTitle(R.string.app_name);
+
+            // seta a cor inicial do desligada
+            ((TextView)findViewById(R.id.tStatus)).setTextColor(0xff444444);
+
+            // if device support camera?
+            if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA))
+            {
+            Toast toast = Toast.makeText(getApplicationContext(), R.string.err00, Toast.LENGTH_SHORT);
+            toast.show();
+            return;
+            }
+            else
+            {
+            // Camera exists, so let's enalbe the features!
+            Button button = (Button) findViewById(R.id.bPower);
+            button.setOnClickListener(new OnClickListener()
+            {
+            public void onClick(View v)
+            {
+            try
+            {
+
+            if (!status)
+            {
+            turnLightOn();
+            }
+            else
+            {
+            turnLightOff();
+            }
+            }
+            catch (Exception e)
+            {
+            ((TextView)findViewById(R.id.tErro)).setText(e.getMessage());
+            }
+            }
+            });
+
+            }
+
+
+            }
+            catch (Exception e)
+            {
+            ((TextView)findViewById(R.id.tErro)).setText(e.getMessage());
+            }
+
+            }
+            &commat;Override
+            protected void onPause()
+            {
+            super.onPause();
+
+            try
+            {
+            turnLightOff();
+            }
+            catch (Exception e)
+            {
+            ((TextView)findViewById(R.id.tErro)).setText(e.getMessage());
+            }
+
+            }
+
+            &commat;Override
+            protected void onStop()
+            {
+            super.onStop();
+
+            try
+            {
+            turnLightOff();
+            }
+            catch (Exception e)
+            {
+            ((TextView)findViewById(R.id.tErro)).setText(e.getMessage());
+            }
+
+            }
+
+            &commat;Override
+            protected void onDestroy()
+            {
+            super.onDestroy();
+
+            try
+            {
+            turnLightOff();
+            }
+            catch (Exception e)
+            {
+            ((TextView)findViewById(R.id.tErro)).setText(e.getMessage());
+            }
+            }
+
+            // menu methods
+
+            &commat;Override
+            public boolean onCreateOptionsMenu(Menu menu)
+            {
+            try
+            {
+            getMenuInflater().inflate(R.menu.activity_main, menu);
+            return true;
+            }
+            catch (Exception e)
+            {
+            ((TextView)findViewById(R.id.tErro)).setText(e.getMessage());
+            return false;
+            }
+            }
+
+            &commat;Override
+            public boolean onOptionsItemSelected(MenuItem item)
+            {
+            switch (item.getItemId())
+            {
+            case R.id.menu_about:
+
+            String message =  "<br />";
+            message = message + "^..^&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bruno Paes<br />";
+            message = message + "(o o)&nbsp;&nbsp;&nbsp;Junho  2014<br />";
+            message = message + "<br />";
+            message = message + "<a href=\"http://brunopaes.tk\">http://brunopaes.tk</a><br />";
+
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            // set title
+            alertDialogBuilder.setTitle("Sobre o aplicativo");
+            // set dialog message
+            alertDialogBuilder
+            .setMessage(Html.fromHtml(message))
+            .setIcon(android.R.drawable.ic_dialog_info)
+            .setCancelable(true)
+            .setPositiveButton("OK",new DialogInterface.OnClickListener()
+            {
+            public void onClick(DialogInterface dialog,int id)
+            {
+            dialog.dismiss();
+            }
+            });
+
+            // create alert dialog
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            // show it
+            alertDialog.show();
+
+            // Seta o texto como clicavel
+            ((TextView)alertDialog.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
+
+            return true;
+            }
+
+            return false;
+            }
+
+            }
+    </code>
+</div>
+
+<p>
+    Use this code for the CameraPreview.java
+</p>
+
+<div class="p-1 border border-secondary bg-light">
+    <code>
+        package com.lanterna;
+        // GOOGLE CODE
+        import java.io.IOException;
+        import android.content.Context;
+        import android.hardware.Camera;
+        import android.util.Log;
+        import android.view.SurfaceHolder;
+        import android.view.SurfaceView;
+        /** A basic Camera preview class :: Google Code */
+        public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
+        {
+        final private static String TAG = "CameraPreview";
+        private SurfaceHolder mHolder;
+        private Camera mCamera;
+        public CameraPreview(Context context, Camera camera) {
+        super(context);
+        mCamera = camera;
+        // Install a SurfaceHolder.Callback so we get notified when the
+        // underlying surface is created and destroyed.
+        mHolder = getHolder();
+        mHolder.addCallback(this);
+        // deprecated setting, but required on Android versions prior to 3.0
+        mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+        }
+        public void surfaceCreated(SurfaceHolder holder) {
+        // The Surface has been created, now tell the camera where to draw the preview.
+        try
+        {
+        mCamera.setPreviewDisplay(holder);
+        mCamera.startPreview();
+        } catch (IOException e)
+        {
+        Log.d(TAG, "Error setting camera preview: " + e.getMessage());
+        }
+        }
+        public void surfaceDestroyed(SurfaceHolder holder) {
+        // empty. Take care of releasing the Camera preview in your activity.
+        }
+        public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
+        // If your preview can change or rotate, take care of those events here.
+        // Make sure to stop the preview before resizing or reformatting it.
+        if (mHolder.getSurface() == null){
+        // preview surface does not exist
+        return;
+        }
+        // stop preview before making changes
+        try {
+        mCamera.stopPreview();
+        } catch (Exception e){
+        // ignore: tried to stop a non-existent preview
+        }
+        // set preview size and make any resize, rotate or
+        // reformatting changes here
+        // start preview with new settings
+        try {
+        mCamera.setPreviewDisplay(mHolder);
+        mCamera.startPreview();
+        } catch (Exception e){
+        Log.d(TAG, "Error starting camera preview: " + e.getMessage());
+        }
+        }
+        }
+    </code>
+</div>
+
+<p>
+    Use this code for the activity_main.xml
+</p>
+
+<div class="p-1 border border-secondary bg-light">
+    <code>
+        &lt;RelativeLayout xmlns:android=\&quot;http://schemas.android.com/apk/res/android\&quot;<br />
+        xmlns:tools=\&quot;http://schemas.android.com/tools\&quot;<br />
+        android:layout_width=\&quot;match_parent\&quot;<br />
+        android:layout_height=\&quot;match_parent\&quot;<br />
+        android:gravity=\&quot;center_horizontal\&quot; &gt;<br />
+        <br />
+        &lt;FrameLayout<br />
+        android:id=\&quot;&commat;+id/sPreview\&quot;<br />
+        android:layout_width=\&quot;1dp\&quot;<br />
+        android:layout_height=\&quot;1dp\&quot;<br />
+        /&gt;<br />
+        <br />
+        &lt;Button<br />
+        android:id=\&quot;&commat;+id/bPower\&quot;<br />
+        android:layout_width=\&quot;wrap_content\&quot;<br />
+        android:layout_height=\&quot;wrap_content\&quot;<br />
+        android:layout_centerHorizontal=\&quot;true\&quot;<br />
+        android:layout_centerVertical=\&quot;true\&quot;<br />
+        android:padding=\&quot;50dp\&quot;<br />
+        android:text=\&quot;&commat;string/power\&quot; /&gt;<br />
+        <br />
+        &lt;TextView<br />
+        android:id=\&quot;&commat;+id/tStatus\&quot;<br />
+        android:layout_width=\&quot;wrap_content\&quot;<br />
+        android:layout_height=\&quot;wrap_content\&quot;<br />
+        android:layout_above=\&quot;&commat;+id/bPower\&quot;<br />
+        android:layout_centerHorizontal=\&quot;true\&quot;<br />
+        android:layout_marginBottom=\&quot;27dp\&quot;<br />
+        android:text=\&quot;&commat;string/status_off\&quot;<br />
+        android:gravity=\&quot;center\&quot;<br />
+        android:textAppearance=\&quot;?android:attr/textAppearanceLarge\&quot; /&gt;<br />
+        <br />
+        &lt;TextView<br />
+        android:id=\&quot;&commat;+id/tErro\&quot;<br />
+        android:layout_width=\&quot;match_parent\&quot;<br />
+        android:layout_height=\&quot;wrap_content\&quot;<br />
+        android:layout_alignParentBottom=\&quot;true\&quot;<br />
+        android:layout_centerHorizontal=\&quot;true\&quot;<br />
+        android:textAppearance=\&quot;?android:attr/textAppearanceSmall\&quot; /&gt;<br />
+        <br />
+        &lt;/RelativeLayout&gt;
+    </code>
+</div>
+
+<p>
+    Use this code for the AndroidManifest.xml
+</p>
+
+<div class="p-1 border border-secondary bg-light">
+    <code>
+        &lt;manifest xmlns:android=\&quot;http://schemas.android.com/apk/res/android\&quot;<br />
+        package=\&quot;com.activitie\&quot;<br />
+        android:versionCode=\&quot;1\&quot;<br />
+        android:versionName=\&quot;1.0\&quot;&gt;<br />
+        <br />
+        &lt;uses-sdk android:minSdkVersion=\&quot;8\&quot; android:targetSdkVersion=\&quot;15\&quot; /&gt;<br />
+        <br />
+        &lt;uses-permission android:name=\&quot;android.permission.CAMERA\&quot; /&gt;<br />
+        &lt;uses-permission android:name=\&quot;android.permission.FLASHLIGHT\&quot;/&gt;<br />
+        &lt;uses-permission android:name=\&quot;android.permission.WAKE_LOCK\&quot; /&gt;<br />
+        &lt;uses-feature android:name=\&quot;android.hardware.camera\&quot; /&gt;<br />
+        &lt;uses-feature android:name=\&quot;android.hardware.camera.autofocus\&quot; /&gt;<br />
+        &lt;uses-feature android:name=\&quot;android.hardware.camera.flash\&quot; /&gt;<br />
+        <br />
+        <br />
+        &lt;application <br />
+        android:icon=\&quot;&commat;drawable/ic_launcher\&quot; <br />
+        android:label=\&quot;Lanterna\&quot; &gt;<br />
+        &lt;activity <br />
+        android:name=\&quot;com.lanterna.MainActivity\&quot;<br />
+        android:screenOrientation=\&quot;portrait\&quot; &gt;<br />
+        &lt;intent-filter&gt;<br />
+        &lt;action android:name=\&quot;android.intent.action.MAIN\&quot; /&gt;<br />
+        &lt;category android:name=\&quot;android.intent.category.LAUNCHER\&quot; /&gt;<br />
+        &lt;/intent-filter&gt;<br />
+        &lt;/activity&gt;<br />
+        &lt;/application&gt;<br />
+        <br />
+        &lt;/manifest&gt;<br />
+    </code>
+</div>
+
+
+<p>
+    Voila! You can now improve it! Any errors or comments please send me an email.
+<p>
+
+<img src="~/images/lanternascreen.png" alt="" class="img-responsive center-block" />
+
+<p>
+    Screenshot of Nexus 5
+</p>

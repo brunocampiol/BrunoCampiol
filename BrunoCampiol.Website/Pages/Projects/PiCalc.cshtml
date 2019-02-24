@@ -1,0 +1,172 @@
+﻿@page
+
+<h1 class="responsive-title text-center">
+    Javascript Pi Calculator
+</h1>
+
+<p>
+    This page uses <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers">Javascript Worker</a>
+    to run scripts in background, without affecting the performance of the page. It uses <a href="Chudnovsky algorithm">Chudnovsky algorithm</a>
+    with <a href="https://github.com/MikeMcl/decimal.js/">decimal.js</a> library. Basically the page will create a new Worker passing to it the
+    precision desired. The code will run in a separate thread (high-CPU) so that will not cause the page to freeze.
+</p>
+
+<p>
+    The Chudnovsky algorithm is a fast method for calculating the digits of π. It was published by the Chudnovsky brothers in 1988. Basically, the formula is:
+</p>
+
+<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/9326d54cc9ecc8975fba2859ed1771c1f7ef1cca"  class="img-fluid mx-auto d-block pb-4"  />
+
+<p>
+    Unlike many other programming languages, JavaScript does not define different types of numbers, like integers, short, long, floating-point etc.
+    JavaScript numbers are always stored as double precision floating point numbers, following the international IEEE 754 standard. Therefore, it is
+    required to use the <a href="https://github.com/MikeMcl/decimal.js/">decimal.js</a> library.
+</p>
+
+@*<pre>
+function chudnovsky(digits) {
+    // The number of decimal digits the algorithm generates per iteration.
+    let digits_per_iteration = 14.1816474627254776555;
+    let iterations = (digits / digits_per_iteration) + 1;
+
+    let a = new Decimal(13591409);
+    let b = new Decimal(545140134);
+    let c = new Decimal(-640320);
+
+    let numerator, denominator;
+    let sum = new Decimal(0);
+
+    let roundIterations = Math.ceil(iterations);
+    let previewDigits = 1;
+    let previewIteration = Math.ceil(digits / roundIterations);
+
+    for (let k = 0; k < iterations; k++) {
+
+        // (6k)! * (13591409 + 545140134k)
+        numerator = factorial(6 * k).times(a.plus(b.times(k)));
+
+        // (3k)! * (k!)^3 * -640320^(3k)
+        denominator = factorial(3 * k).times(factorial(k).pow(3)).times(c.pow(3 * k));
+
+        sum = sum.plus(numerator.div(denominator));
+
+        // TODO: change the preview so that it calculates faster
+        // Preview for UI - user info
+        let preview = Decimal.sqrt(10005).times(426880).div(sum).toSD(previewDigits).toString();
+        let previewMessage = k + ' of ' + roundIterations + ' iterations. &lt;br /&gt;&lt;br /&gt; ' + preview;
+        previewDigits += previewIteration;
+        self.postMessage({ 'PiValue': previewMessage });
+    }
+
+    return Decimal.sqrt(10005).times(426880).div(sum).toSD(digits);
+}
+</pre>*@
+
+<br />
+
+<p class="responsive-subtitle">
+    Can you browser calculate all pi digits?
+</p>
+
+<p>
+
+</p>
+
+<form class="form-inline">
+    <div class="form-group mb-2">
+        <label for="staticDigits" class="sr-only">Number of Pi digits</label>
+        <input type="text" readonly class="form-control-plaintext" id="staticDigits" value="Number of Pi digits">
+    </div>
+    <div class="form-group mx-sm-3 mb-2">
+        <label for="inputDigits" class="sr-only">Digits</label>
+        <input type="number" class="form-control" id="inputDigits" placeholder="100" value="1000">
+    </div>
+    <button type="button" class="btn btn-primary mb-2">Calculate</button>
+</form>
+
+<div class="alert alert-danger" role="alert" style="display:none;">
+</div>
+
+<p class="responsive-subtitle">
+    Result
+</p>
+
+<p class="responsive-subtitle pi-result">
+</p>
+
+
+<script>
+    // The "use strict" directive was new in ECMAScript version 5.
+    // It is not a statement, but a literal expression, ignored by earlier versions of JavaScript.
+    // The purpose of "use strict" is to indicate that the code should be executed in "strict mode".
+    // With strict mode, you can not, for example, use undeclared variables.
+    'use strict';
+
+    // Checks if jquery has been loaded
+    if (!window.jQuery) {
+        throw new Error('Jquery is required');
+    }
+
+    function launchPiWebWorker(digits) {
+        let worker = new Worker('../min/piCalculator.min.js');
+
+        worker.onmessage = function (e) {
+            $(".pi-result").html(e.data.PiValue);
+        };
+        worker.onerror = function (e) {
+            alert('Error: Line ' + e.lineno + ' in ' + e.filename + ': ' + e.message);
+        };
+
+        //start the worker
+        worker.postMessage({
+            'cmd': 'chudnovsky',
+            'value': digits
+        });
+    }
+
+    function isPositiveNumericInput(value) {
+        let regexp = new RegExp('^[1-9]\\d*$');
+        let result = regexp.test(value);
+        return result;
+    }
+
+    // A page can't be manipulated safely until the document is "ready."
+    // Shorthand for $(document).ready()
+    $(function () {
+
+        // TODO: check if worker is supported
+        //if (typeof (Worker) !== "undefined") {
+        //    // Yes! Web worker support!
+        //    // Some code.....
+        //    console.log('Supported');
+        //} else {
+        //    // Sorry! No Web Worker support..
+        //    console.log('Not today :(');
+        //}
+
+        $('.btn').click(function () {
+            let digits = $('#inputDigits').val();
+            let alert = $('.alert-danger');
+            let maxInt = 99999999;
+
+            // Hides any previous attempt
+            alert.hide();
+
+            // If it is positive integer number
+            if (isPositiveNumericInput(digits)) {
+                // If value is not bigger than 
+                if (digits === "" || parseInt(digits) <= maxInt) {
+                    launchPiWebWorker(parseInt(digits));
+                }
+                else {
+                    alert.text('Value greter than ' + maxInt);
+                    alert.show();
+                }
+            }
+            else {
+                alert.text('Value is not an integer bigger than zero');
+                alert.show();
+            } 
+        });
+    });
+</script>

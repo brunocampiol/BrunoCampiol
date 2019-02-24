@@ -1,0 +1,16 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "provider": "cdnjs",
+      "library": "flag-icon-css@3.2.1",
+      "destination": "wwwroot/lib/flag-icon-css/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "decimal.js@10.0.2",
+      "destination": "wwwroot/lib/decimal/"
+    }
+  ]
+}

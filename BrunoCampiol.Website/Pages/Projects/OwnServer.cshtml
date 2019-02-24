@@ -1,0 +1,141 @@
+﻿@page
+
+<br />
+
+<div class="alert alert-warning" role="alert">
+    <strong>Attention!</strong>: This project is obsolete since DynDns stopped to offer free accounts,
+    even if you pass to them your credit card, as the old trick. So I will not translate this page by now...
+</div>
+
+<h1>
+    Mas como?
+</h1>
+
+<p>
+    Sim, e possivel criar um servidor em casa, sem pagar nada por ele.
+    Claro, a luz nao vem de graca. A nao ser que voce tenha uma estacao solar ou algo parecido!
+</p>
+
+<h1>
+    Itens Requeridos
+</h1>
+
+<ul>
+    <li>
+        1 Computador sem uso
+    </li>
+    <li>
+        1 Windows Server 2003
+    </li>
+    <li>
+        1 <a href="http://pt.wikipedia.org/wiki/Fornecedor_de_acesso_%C3%A0_Internet">ISP</a> (Internet Service Provider)
+    </li>
+</ul>
+
+<p>
+    A primeira coisa antes de mais nada, e procurar saber que tipos de portas sao bloqueadas pelo seu ISP.
+    Para uso domestico e sua seguranca, os ISP procuram bloquear as portas de acesso ao seu IP.
+    Ou seja, mesmo que voce fizer tudo certo, seu servidor, servico ou site nao sera visto por ninguem.
+    O site esta hospedado em porto alegre, e meu ISP e a NET Virtua. Para o contrato Mega Flash, as portas bloqueadas sao:
+</p>
+
+<ul>
+    <li>
+        21 FTP-control (command)
+    </li>
+    <li>
+        25 Simple Mail Transfer Protocol (SMTP)-used for e-mail routing between mail servers
+    </li>
+    <li>
+        53 Domain Name System (DNS)
+    </li>
+    <li>
+        80 Hypertext Transfer Protocol (HTTP)
+    </li>
+    <li>
+        110 Post Office Protocol v3 (POP3)
+    </li>
+    <li>
+        135 DCE endpoint resolution
+    </li>
+    <li>
+        136 ????
+    </li>
+    <li>
+        137 NetBIOS NetBIOS Name Service
+    </li>
+    <li>
+        138 NetBIOS NetBIOS Datagram Service
+    </li>
+    <li>
+        139 NetBIOS NetBIOS Session Service
+    </li>
+    <li>
+        443 HTTPS (Hypertext Transfer Protocol over SSL/TLS)
+    </li>
+    <li>
+        445 Microsoft-DS SMB file sharing
+    </li>
+    <li>
+        587 e-mail message submission (SMTP)
+    </li>
+    <li>
+        1434 MSSQL (Microsoft SQL Server database management system) Monitor
+    </li>
+</ul>
+
+<p>
+    Para ficar mais facil identificar se voce tem ou nao portas bloqueadas, o site CanYouSeeMe ajuda a fazer isso.
+    Provavelmente se voce for fazer o teste agora, nao ira dar certo pois ainda nao terminamos de configurar todo o ambiente.
+</p>
+
+<h1>
+    Maos a obra
+</h1>
+
+<p>
+    Presumo que voce ja tenha um certo conhecimento na area de instalacao de sistemas operacionais. 
+    Tambem presumo que voce que o mesmo ja esteja instalando e com as suas devidas atualizacoes.
+    A primeira coisa a fazer e instalar o IIS no servidor. 
+    Aqui neste site tem uma ajuda de como fazer isso. Eu estou com o IIS 6.0
+</p>
+
+<p>
+    Dica: Desabilite o firewall do seu servidor para realizar as instalacoes e testes. 
+    Assim fica mais facil descobrir onde exatamente esta algum problema que possa vir a ocorrer.
+</p>
+
+<img src="~/images/Images/iis.png" />
+
+<p>
+    Depois de instalado o IIS, ele provavelmente ja ira vir com um site padrao. 
+    Voce pode testar acessando o IP do seu servidor na rede local e verificando se o mesmo responde com uma pagina da web.
+</p>
+
+<p>
+    Para verificar, use o endereco de IP do seu computador no navegador. Se abrir a sua pagina, esta tudo certo.
+</p>
+
+<p>
+    OK, estamos com o servidor com tudo em cima, o site funciona na rede local. Agora como fazer para ele ser descoberto na internet? 
+    Temos duas opcoes: Ou voce tem uma internet com IP fixo, ou usa um servico de DNS dinamico. 
+    A principio, qualquer servidor de DNS dinamico serve. 
+    Como nao tenho dinheiro para pagar um IP fixo, resolvi optar por manter meu plano de internet e usar uma conta gratis de DNS. 
+    Eu tenho uma conta do DynDns. No site, so aparecem planos pagos, entao quem quiser uma conta free, aqui explica como criar uma. 
+    Quando criada a conta, voce pode definir um endereco seu para voce. No caso, criei brunopaes.dyndns.info. 
+    Agora, voce tem que fazer esse endereco apontar para o seu endereco IP. Existem varias solucoes para isso. 
+    Configurar todo dia manualmente no servico de DNS, usar a configuracao automatica do roteador (router precisa ter a opcao), 
+    ou instalar a aplicacao de cliente que pode ser fornecida pelo mesmo.
+</p>
+
+<img src="~/images/Images/router.png" />
+
+<img src="~/images/Images/router1.png" />
+
+<p>
+    Depois de tudo configurado e em ponto de bala, procure um cantinho aconchegante para o nosso novo integrante. 
+    Voce vai precisar deixar a maquina sempre ligada, obviamente. Segue entao abaixo uma palinha de onde fica o site que voce esta olhando. 
+    E o banheiro mesmo. Azar, foi aonde deu...
+</p>
+
+<img src="~/images/Images/servidor3.jpg" />
