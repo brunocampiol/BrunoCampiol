@@ -1,4 +1,5 @@
-// This is the 3rd world
+// World NOT being used right now
+// Needs to be added in the bundleconfig to load
 
 demos.compound = {};
 demos.compound.createCompoundBall = function(world, x, y) {

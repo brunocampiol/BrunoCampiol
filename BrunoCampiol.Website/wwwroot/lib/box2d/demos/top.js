@@ -5,7 +5,8 @@ demos.top.createBall = function(world, x, y, rad, fixed) {
 	var ballSd = new b2CircleDef();
 	if (!fixed) ballSd.density = 1.0;
 	ballSd.radius = rad || 10;
-	ballSd.restitution = 0.2;
+    ballSd.restitution = 0.2;
+    ballSd.friction = 9999999;
 	var ballBd = new b2BodyDef();
 	ballBd.AddShape(ballSd);
 	ballBd.position.Set(x,y);

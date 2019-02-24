@@ -104,7 +104,6 @@
       "wwwroot/lib/box2d/demos/demo_base.js",
       "wwwroot/lib/box2d/demos/top.js",
       "wwwroot/lib/box2d/demos/stack.js",
-      "wwwroot/lib/box2d/demos/compound.js",
       "wwwroot/lib/box2d/demos/pendulum.js",
       "wwwroot/lib/box2d/demos/crank.js",
       "wwwroot/lib/box2d/demos/demos.js"

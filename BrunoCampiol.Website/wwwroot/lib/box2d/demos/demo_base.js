@@ -120,12 +120,15 @@ function createGround(world) {
 }
 
 // Functions that creates the left click create
-function createBall(world, x, y) {
+function createBall(world, x, y, radius, restitution, friction) {
 	var ballSd = new b2CircleDef();
-	ballSd.density = 1.0;
-	ballSd.radius = 20;
-	ballSd.restitution = 1.0 	
-	ballSd.friction = 0;
+    ballSd.density = 1.0;
+    ballSd.radius = radius;
+    //ballSd.radius = 20;
+    ballSd.restitution = restitution;
+    //ballSd.restitution = 0.2; 	
+    ballSd.friction = friction;
+	//ballSd.friction = 0.2;
 	var ballBd = new b2BodyDef();
 	ballBd.AddShape(ballSd);
 	ballBd.position.Set(x,y);

@@ -92,7 +92,7 @@ function InitializeBox2D() {
 
             // 0 = circle ; 1 = square
             if (getDropType() == 0) {
-                demos.top.createBall(world, positionX, positionY);
+                createBall(world, positionX, positionY, 10, 0.2, 0.2);
             }
             else {
                 createBox(world, positionX, positionY, 10, 10, false);
