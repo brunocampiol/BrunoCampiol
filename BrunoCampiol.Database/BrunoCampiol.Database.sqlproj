@@ -66,5 +66,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema Compare\LOCAL.scmp" />
+    <None Include="Schema Compare\PROD.scmp" />
   </ItemGroup>
 </Project>
