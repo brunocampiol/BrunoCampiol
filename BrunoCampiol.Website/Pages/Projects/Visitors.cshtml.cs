@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using BrunoCampiol.Common.Common;
 using BrunoCampiol.Common.Global;
+using BrunoCampiol.Common.Models;
 using BrunoCampiol.Repository.Context;
 using BrunoCampiol.Repository.Generic;
 using BrunoCampiol.Repository.Models;
@@ -15,12 +17,16 @@ namespace BrunoCampiol.Website.Pages.Projects
     public class VisitorsModel : PageModel
     {
         public string visitorListString { get; private set; }
-        
+
+        public string pieDataScript { get; private set; }
+
         public void OnGet()
         {
             List<VISITORS> visitorList = GetVisitorList(1, 50);
 
             visitorListString = GetVisitorListAsHtml(visitorList);
+
+            //GetPieData();
         }
 
         public IActionResult OnGetRow(int id)
@@ -78,6 +84,81 @@ namespace BrunoCampiol.Website.Pages.Projects
             List<VISITORS> listVisitors = visitorListQuery.ToList();
 
             return listVisitors;
+        }
+
+        private Color GetRandomColor()
+        {
+            Random rnd = new Random();
+
+            Color randomColor = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+
+            return randomColor;
+        }
+
+        private string GetRandomColorScript(string colorHardness)
+        {
+            Color color = GetRandomColor();
+
+            string scriptColor = $"'rgba({color.R.ToString()},{color.G.ToString()},{color.B.ToString()},{colorHardness})'";
+
+            return scriptColor;
+        }
+
+        private List<CountryChartData> GetDatabasePieData()
+        {
+            var connectionString = GlobalSettings.Instance.ConnectionString;
+
+            var options = new DbContextOptionsBuilder<DatabaseContext>().UseSqlServer(connectionString).Options;
+
+            DatabaseContext context = new DatabaseContext(options);
+            Repository<VISITORS> repository = new Repository<VISITORS>(context);
+
+            IQueryable<CountryChartData> visitorListQuery = repository.GetAll()
+                                                                .GroupBy(group => group.COUNTRY)
+                                                                .Select(item => new CountryChartData { Country = item.First().COUNTRY,
+                                                                                                        Count = item.Count() });
+
+            List<CountryChartData> countriesData = visitorListQuery.ToList();
+
+            return countriesData;
+        }
+
+        private void GetPieData()
+        {
+            List<CountryChartData> countriesData = GetDatabasePieData();
+
+            string script = String.Empty;
+
+            script += "<script>";
+
+            script += " countrySum = [";
+
+            for (int i = 0; i < countriesData.Count; i++)
+            {
+                if (i == countriesData.Count - 1) script += countriesData[i].Count + "]; ";
+                else script += countriesData[i].Count + ", ";
+            }
+
+            script += " countryLabels = [";
+
+            for (int i = 0; i < countriesData.Count; i++)
+            {
+                if (i == countriesData.Count - 1) script += "'" + countriesData[i].Country + "']; ";
+                else script += "'" + countriesData[i].Country + "', ";
+            }
+
+            script += " countryColors = [";
+
+            for (int i = 0; i < countriesData.Count; i++)
+            {
+                if (i == countriesData.Count - 1) script += GetRandomColorScript("1") + "]; ";
+                else script += GetRandomColorScript("1") + ", ";
+            }
+
+
+            script += "</script>";
+
+            pieDataScript = script;
         }
     }
 }
