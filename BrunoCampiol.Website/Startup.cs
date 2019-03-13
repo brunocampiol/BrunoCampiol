@@ -91,6 +91,7 @@ namespace BrunoCampiol.Website
             // Allows .exe downloads
             var provider = new FileExtensionContentTypeProvider();
             provider.Mappings[".exe"] = "application/octect-stream";
+            provider.Mappings[".vsix"] = "application/vsix";
             return new StaticFileOptions { ContentTypeProvider = provider };
         }
     }
