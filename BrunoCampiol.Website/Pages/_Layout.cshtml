@@ -40,6 +40,16 @@
                     <li class="nav-item"><a class="nav-link" asp-page="/Downloads">Downloads</a></li>
                     <li class="nav-item"><a class="nav-link" asp-page="/About">About</a></li>
                 </ul>
+                <ul class="navbar-nav">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item"><a class="nav-link" asp-page="/Identity/Profile">@User.Identity.Name</a></li>
+                    }
+                    else
+                    {
+                        <li class="nav-item"><a class="nav-link" asp-page="/Identity/Index">Sign In</a></li>
+                    }
+                </ul>
                 <environment include="Development">
                     <span class="text-warning">Development Mode</span>
                 </environment>

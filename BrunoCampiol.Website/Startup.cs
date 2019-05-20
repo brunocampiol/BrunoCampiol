@@ -1,4 +1,5 @@
 using BrunoCampiol.Common.Global;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.StaticFiles;
@@ -54,7 +55,31 @@ namespace BrunoCampiol.Website
             // The AntiForgery Token needs to be added and before services.AddMvc()
             services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
 
+            // http://codereform.com/blog/post/asp-net-core-2-1-authentication-with-social-logins/
+            services.AddAuthentication(options =>
+            {
+                // No database user authentication storage
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            })
+            .AddGitHub(options =>
+            {
+                options.ClientId = Configuration["GitHub:ClientId"];
+                options.ClientSecret = Configuration["GitHub:ClientSecret"];
+            })
+            .AddCookie(options => {
+                options.LoginPath = "/Identity";
+            });
+
+
             services.AddMvc();
+
+            //services.AddMvc()
+            //    .AddRazorPagesOptions(options =>
+            //    {
+            //        options.Conventions.AuthorizeFolder("/Identity").AllowAnonymousToPage("/Identity/Index");
+            //    });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,6 +97,8 @@ namespace BrunoCampiol.Website
 
             // Automatic HTTPS redirection
             // app.UseHttpsRedirection();
+
+            app.UseAuthentication();
 
             app.UseStaticFiles(GetStaticFileConfiguration());
 
