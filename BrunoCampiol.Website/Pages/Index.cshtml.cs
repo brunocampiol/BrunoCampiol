@@ -15,14 +15,29 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
 
 namespace BrunoCampiol.Website.Pages
 {
     public class IndexModel : PageModel
     {
+        private readonly ILogger _logger;
+
+        public IndexModel(ILogger<IndexModel> logger)
+        {
+            _logger = logger;
+        }
+
         public void OnGet()
         {
+            //_logger.LogDebug("debug");
+            //_logger.LogTrace("ttrace");
+            //_logger.LogInformation("info");
+            //_logger.LogWarning("warning");
+            //_logger.LogError("error");
+            //_logger.LogCritical("critical");
+
             // Ip and UserAgent shall not be queried in thread
             string userAgent = Request.Headers["User-Agent"].ToString();
             string ipAddress = Request.HttpContext.Connection.RemoteIpAddress.ToString();
@@ -36,7 +51,6 @@ namespace BrunoCampiol.Website.Pages
             Thread thread = new Thread(() => SaveVisitor(userAgent, ipAddress, browserName, osName, headerString));
             thread.Start();
         }
-
 
         private void SaveVisitor(string userAgent, string ipAddress, string browserName, string osName, string headers)
         {
@@ -78,12 +92,14 @@ namespace BrunoCampiol.Website.Pages
                 }
                 catch (Exception ex)
                 {
+                    _logger.LogCritical(ex, ex.AllExceptionMessages(), null);
+
                     using (DatabaseContext logContext = new DatabaseContext(options))
                     {
                         Repository<LOGS> repo = new Repository<LOGS>(logContext);
 
                         LOGS log = new LOGS();
-                        log.LEVEL = LogLevel.ERROR.ToString();
+                        log.LEVEL = LogEntryLevel.ERROR.ToString();
                         log.MESSAGE = "IP " + ipAddress + Environment.NewLine + ex.AllExceptionMessages();
                         log.STACK_TRACE = ex.StackTrace;
                         log.FULL_EXCEPTION = ex.ToString();

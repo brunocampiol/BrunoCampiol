@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BrunoCampiol.Common.Models
 {
-    public enum LogLevel
+    public enum LogEntryLevel
     {
         TRACE,
         INFO,

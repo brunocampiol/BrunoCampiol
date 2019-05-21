@@ -95,9 +95,6 @@ namespace BrunoCampiol.Website
                 app.UseExceptionHandler("/Error");
             }
 
-            // Automatic HTTPS redirection
-            // app.UseHttpsRedirection();
-
             app.UseAuthentication();
 
             app.UseStaticFiles(GetStaticFileConfiguration());
