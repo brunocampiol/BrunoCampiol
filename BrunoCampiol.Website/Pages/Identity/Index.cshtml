@@ -1,14 +1,24 @@
-﻿@page "{provider?}"
-
+﻿@page
 @model BrunoCampiol.Website.Pages.Identity.IndexModel
-@{
 
+<h1>My Identity</h1>
+
+
+@if (Model.IsAuthenticated)
+{
+    <h2>
+        @Model.Name
+    </h2>
+    <h2>
+        @Model.Provider
+    </h2>
+    <a class="btn btn-primary" asp-page="/Identity/SignOut">Sign Out</a>
 }
+else
+{
+    <h2>Login with</h2>
 
-<h1>Login Page</h1>
-
-<a class="btn btn-primary" asp-page="/Identity/Index" asp-route-provider="GitHub">Git Hub</a>
-
-<br />
-
-<a asp-page="../Identity/Profile">Check my profile</a>
+    <a class="btn btn-primary" asp-page="/Identity/SignIn" asp-route-provider="GitHub">Git Hub</a>
+    <a class="btn btn-primary" asp-page="/Identity/SignIn" asp-route-provider="Twitter">Twitter</a>
+    <a class="btn btn-primary" asp-page="/Identity/SignIn" asp-route-provider="Facebook">Facebook</a>
+} 

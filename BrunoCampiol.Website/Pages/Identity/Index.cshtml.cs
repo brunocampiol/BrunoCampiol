@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -10,22 +11,19 @@ namespace BrunoCampiol.Website.Pages.Identity
 {
     public class IndexModel : PageModel
     {
+        public bool IsAuthenticated = false;
+        public string Name;
+        public string Provider;
 
-        public IActionResult OnGet(string provider)
+        public void OnGet()
         {
-            if (provider == null) return Page();
+            if (User.Identity.IsAuthenticated)
+            {
+                IsAuthenticated = true;
 
-            string returnUrl = "http://localhost:2000";
-
-            return Challenge(new AuthenticationProperties { RedirectUri = returnUrl ?? "/" }, provider);
+                Name = User.Identity.Name;
+                Provider = User.Identity.AuthenticationType;
+            }
         }
-
-        //public void OnGet(string provider)
-        //{
-        //    string returnUrl = "/Identity/Profile";
-        //    string myprovider = "";
-
-        //    Challenge(new AuthenticationProperties { RedirectUri = returnUrl ?? "/" }, provider);
-        //}
     }
 }

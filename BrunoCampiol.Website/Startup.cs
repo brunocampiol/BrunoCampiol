@@ -63,10 +63,19 @@ namespace BrunoCampiol.Website
                 options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             })
+            .AddFacebook(options => {
+                options.AppId = Configuration["Facebook:AppId"];
+                options.AppSecret = Configuration["Facebook:AppSecret"];
+            })
             .AddGitHub(options =>
             {
                 options.ClientId = Configuration["GitHub:ClientId"];
                 options.ClientSecret = Configuration["GitHub:ClientSecret"];
+            })
+            .AddTwitter(options =>
+            {
+                options.ConsumerKey = Configuration["Twitter:ApiKey"];
+                options.ConsumerSecret = Configuration["Twitter:ApiSecret"];
             })
             .AddCookie(options => {
                 options.LoginPath = "/Identity";
