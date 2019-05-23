@@ -14,7 +14,7 @@
 *.pubxml
 *.pubxml.user
 appsettings.json
-appsettings.Development2.json
+appsettings.Development.json
 PROD.scmp
 
 # User-specific files (MonoDevelop/Xamarin Studio)
