@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <UserSecretsId>173a9245-0f76-42a8-b885-9be102956879</UserSecretsId>
+    <UserSecretsId>af91172f-3274-412a-84c8-7dd6108c671b</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
@@ -16,7 +16,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AspNet.Security.OAuth.GitHub" Version="2.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.2.4" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.4" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
   </ItemGroup>
 </Project>
