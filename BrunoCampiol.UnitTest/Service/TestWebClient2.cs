@@ -20,13 +20,13 @@ namespace BrunoCampiol.UnitTest.Service
             Mock<IWebClient> fakeRequest = new Mock<IWebClient>();
 
             fakeRequest
-                .Setup(request => request.DownloadString())
+                .Setup(request => request.HttpGet())
                 .Returns(Task.Run(() => "{\"as\":\"AS4230 CLARO S.A.\",\"city\":\"Eldorado do Sul\",\"country\":\"Brazil\",\"countryCode\":\"BR\",\"isp\":\"Claro S.A\",\"lat\":-30.0003,\"lon\":-51.3119,\"org\":\"Dell Computadores DO Brasil Ltda\",\"query\":\"200.182.161.10\",\"region\":\"RS\",\"regionName\":\"Rio Grande do Sul\",\"status\":\"success\",\"timezone\":\"America/Sao_Paulo\",\"zip\":\"92990-000\"}"));
 
             WebsiteService service = new WebsiteService(fakeRequest.Object);
 
             // Act
-            string actualJson = service.WebClient.DownloadString().Result;
+            string actualJson = service.WebClient.HttpGet().Result;
 
             // Assert
             Assert.Equal(expectedJson, actualJson);

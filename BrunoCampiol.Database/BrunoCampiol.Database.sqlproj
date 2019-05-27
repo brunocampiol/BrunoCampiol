@@ -63,6 +63,7 @@
   <ItemGroup>
     <Build Include="Tables\VISITORS.sql" />
     <Build Include="Tables\LOGS.sql" />
+    <Build Include="Tables\POSTS.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema Compare\LOCAL.scmp" />

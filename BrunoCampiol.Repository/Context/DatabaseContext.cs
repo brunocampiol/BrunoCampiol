@@ -11,6 +11,9 @@ namespace BrunoCampiol.Repository.Context
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
 
         public DbSet<LOGS> LOGS { get; set; }
+
+        public DbSet<POSTS> POSTS { get; set; }
+
         public DbSet<VISITORS> VISITORS { get; set; }
     }
 }

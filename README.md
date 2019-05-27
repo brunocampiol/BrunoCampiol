@@ -10,6 +10,10 @@ Copy following json example into appsettings.json and appsettings.Development.js
 {
   "AppSettingsFlavor": "DEVELOPMENT",
   "ConnectionString": "Data Source=.;Initial Catalog=BrunoCampiol;Integrated Security=True",
+  "IpApiService": {
+    "Host": "http://ip-api.com",
+    "Resource": "/json/"
+  },
   "GitHub": {
     "ClientId": "ClientIdValue",
     "ClientSecret": "ClientSecretValue"

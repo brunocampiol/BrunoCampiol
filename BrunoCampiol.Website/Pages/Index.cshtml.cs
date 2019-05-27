@@ -55,7 +55,7 @@ namespace BrunoCampiol.Website.Pages
         private void SaveVisitor(string userAgent, string ipAddress, string browserName, string osName, string headers)
         {
             // Gets current request IP address
-            //if (currentIP == "localhost") return;
+            if (ipAddress == "localhost" || ipAddress == "::1") return;
 
             // Checks if we already have it locally ; default is true
             bool isIpStored = true;
@@ -77,7 +77,7 @@ namespace BrunoCampiol.Website.Pages
 
                     WebsiteService service = new WebsiteService(webClient);
 
-                    string jsonString = service.WebClient.DownloadString().Result;
+                    string jsonString = service.WebClient.HttpGet().Result;
 
                     VISITORS visitor = service.GetVisitorObjectFromJsonString(jsonString);
 

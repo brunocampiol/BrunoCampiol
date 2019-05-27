@@ -1,8 +1,9 @@
 ﻿@page
 @model BrunoCampiol.Website.Pages.Identity.IndexModel
 
-<h1>My Identity</h1>
+<h1>Sign In / Sign Out</h1>
 
+<br />
 
 @if (Model.IsAuthenticated)
 {
@@ -16,9 +17,15 @@
 }
 else
 {
-    <h2>Login with</h2>
+    <div class="alert alert-primary" role="alert">
+        <strong>Hey!</strong>
+        Please login with your credentials to post out comments here.
+        We will not have access to your account.
+    </div>
 
-    <a class="btn btn-primary" asp-page="/Identity/SignIn" asp-route-provider="GitHub">Git Hub</a>
-    <a class="btn btn-primary" asp-page="/Identity/SignIn" asp-route-provider="Twitter">Twitter</a>
-    <a class="btn btn-primary" asp-page="/Identity/SignIn" asp-route-provider="Facebook">Facebook</a>
+    <br />
+
+    <a class="btn btn-primary" asp-page="/Identity/SignIn" asp-route-provider="GitHub">Git Hub <i class="fab fa-github-square"></i></a>
+    <a class="btn btn-primary" asp-page="/Identity/SignIn" asp-route-provider="Twitter">Twitter <i class="fab fa-twitter-square"></i></a>
+    <a class="btn btn-primary" asp-page="/Identity/SignIn" asp-route-provider="Facebook">Facebook <i class="fab fa-facebook-square"></i></a>
 } 
