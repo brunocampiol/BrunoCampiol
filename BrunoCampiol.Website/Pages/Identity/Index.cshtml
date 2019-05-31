@@ -17,6 +17,15 @@
 }
 else
 {
+    <script>
+        if (location.protocol != 'https:') {
+            //if (location.hostname.toLowerCase().indexOf('brunocampiol.com') >= 0)
+            if (location.hostname.toLowerCase() != 'localhost') {
+                location.href = 'https://brunocampiol.com';
+            }
+        }
+    </script>
+
     <div class="alert alert-primary" role="alert">
         <strong>Hey!</strong>
         Please login with your credentials to post out comments here.
