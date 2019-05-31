@@ -53,6 +53,27 @@
 }
 /*END Responsive text title*/
 
+/*START Responsive text title (SUBTITLE)*/
+/*Equivalent to col-sm*/
+@media screen and (max-width: 767px) {
+    .responsive-table-text-visitors {
+        font-size: 0.6em;
+    }
+}
+/*Equivalent to col-md*/
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .responsive-table-text-visitors {
+        font-size: 0.8em;
+    }
+}
+/*Equivalent to col-lx*/
+@media screen and (min-width: 1200px) {
+    .responsive-table-text-visitors {
+        font-size: 1.2em;
+    }
+}
+/*END Responsive text title*/
+
 /**************************************************/
 /*Index*/
 /**************************************************/

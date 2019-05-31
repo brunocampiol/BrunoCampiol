@@ -51,17 +51,17 @@ namespace BrunoCampiol.Website.Pages.Projects
             foreach (VISITORS visitor in visitorList)
             {
                 rows += "<div class=\"row visitor-text\">";
-                rows += "<div class=\"col-2 ellipsis text-center\">";
+                rows += "<div class=\"col-2 ellipsis text-center responsive-table-text-visitors\">";
                 rows += visitor.IP;
                 rows += "</div>";
-                rows += "<div class=\"col-2 ellipsis  text-center\">";
+                rows += "<div class=\"col-2 ellipsis  text-center responsive-table-text-visitors\">";
                 rows += visitor.CREATED_ON_UTC.ToTimeAgo();
                 rows += "</div>";
-                rows += "<div class=\"col-2 ellipsis text-center\">";
+                rows += "<div class=\"col-2 ellipsis text-center responsive-table-text-visitors\">";
                 rows += visitor.COUNTRY;
                 rows += " <span class=\"flag-icon flag-icon-" + visitor.COUNTRY.ToLower() + "\"></span>";
                 rows += "</div>";
-                rows += "<div class=\"col-6 ellipsis\">";
+                rows += "<div class=\"col-6 ellipsis responsive-table-text-visitors\">";
                 rows += visitor.REGION + " - " + visitor.CITY;
                 rows += "</div>";
                 rows += "</div>";
