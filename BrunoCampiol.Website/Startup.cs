@@ -81,7 +81,6 @@ namespace BrunoCampiol.Website
                 options.LoginPath = "/Identity";
             });
 
-
             services.AddMvc();
 
             //services.AddMvc()
@@ -105,14 +104,8 @@ namespace BrunoCampiol.Website
 
             // Sets the environment name based on build flavor
             // This helps razor pages to get right environment
-            if (GlobalSettings.Instance.BuildFlavor == "DEBUG")
-            {
-                env.EnvironmentName = "Development";
-            }
-            else
-            {
-                env.EnvironmentName = "Production";
-            }
+            if (GlobalSettings.Instance.BuildFlavor == "DEBUG") env.EnvironmentName = "Development";
+            else env.EnvironmentName = "Production";
         }
 
         private StaticFileOptions GetStaticFileConfiguration()
