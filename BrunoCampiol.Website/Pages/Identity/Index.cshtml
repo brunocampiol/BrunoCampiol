@@ -1,19 +1,18 @@
 ﻿@page
 @model BrunoCampiol.Website.Pages.Identity.IndexModel
 
-<h1>Sign In / Sign Out</h1>
-
-<br />
-
 @if (Model.IsAuthenticated)
 {
+    <h1>My LogIn Information</h1>
+    <br />
     <h2>
-        @Model.Name
+        <i class="fas fa-user"></i> @Model.Name
     </h2>
     <h2>
-        @Model.Provider
+        <i class="fas fa-passport"></i> @Model.Provider
     </h2>
-    <a class="btn btn-primary" asp-page="/Identity/SignOut">Sign Out</a>
+    <br />
+    <a class="btn btn-lg btn-secondary" asp-page="/Identity/SignOut">Sign Out</a>
 }
 else
 {
@@ -26,15 +25,24 @@ else
         }
     </script>
 
+    <h1>Sign In <i class="fas fa-user"></i></h1>
+
+    <br />
+
     <div class="alert alert-primary" role="alert">
-        <strong>Hey!</strong>
-        Please login with your credentials to post out comments here.
-        We will not have access to your account.
+        <strong>Hey! Want to comment out in my page? </strong>
+        <br />
+        Please login with your social media account and you will be able to post stuff.
+        <br />
+        Don't worry, I will not have access to your account.
     </div>
 
     <br />
 
-    <a class="btn btn-primary" asp-page="/Identity/SignIn" asp-route-provider="GitHub">Git Hub <i class="fab fa-github-square"></i></a>
-    <a class="btn btn-primary" asp-page="/Identity/SignIn" asp-route-provider="Twitter">Twitter <i class="fab fa-twitter-square"></i></a>
-    <a class="btn btn-primary" asp-page="/Identity/SignIn" asp-route-provider="Facebook">Facebook <i class="fab fa-facebook-square"></i></a>
+    <div class="d-flex justify-content-center">
+        <a class="btn btn-lg m-3 text-white" style="background-color:#00acee;" asp-page="/Identity/SignIn" asp-route-provider="Twitter">Twitter <i class="fab fa-twitter-square"></i></a>
+        <a class="btn btn-lg m-3 text-white" style="background-color:#333;" asp-page="/Identity/SignIn" asp-route-provider="GitHub">Git Hub <i class="fab fa-github-square"></i></a>
+        <a class="btn btn-lg m-3 text-white" style="background-color:#3b5998;" asp-page="/Identity/SignIn" asp-route-provider="Facebook">Facebook <i class="fab fa-facebook-square"></i></a>
+    </div>
+
 } 
