@@ -4,7 +4,7 @@
     ViewData["Title"] = "Posts";
 }
 
-<h1>Let your comment below</h1>
+<h1 class="responsive-title text-center">Let your comment below</h1>
 
 <form method="post">
     <div class="form-group">
@@ -14,16 +14,17 @@
     <button type="submit" class="btn btn-secondary mb-2">Post</button>
 </form>
 
-<h1>See other posts here...</h1>
+<h1 class="responsive-title text-center">See other posts here...</h1>
 
 @if (Model.PostList.Count > 0)
 {
     foreach (var post in Model.PostList)
     {
         <div class="media">
-            <img class="align-self-center mr-3" src="https://via.placeholder.com/50" alt="..." />
+            <img class="align-self-start mr-3" src="https://via.placeholder.com/50" alt="..." />
             <div class="media-body">
-                <h5 class="mt-0">@post.USER_NAME</h5>
+                <h5 class="mt-0 mb-0">@post.USER_NAME</h5>
+                <small class="d-block mb-1">@post.CREATED_ON_UTC</small>
                 @post.USER_POST
             </div>
         </div>
