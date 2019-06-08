@@ -61,9 +61,3 @@
 #*.PDF   diff=astextplain
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
-
-###############################################################################
-# github remove javascript as language
-###############################################################################
-* linguist-vendored
-*.js linguist-vendored=false
