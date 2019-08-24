@@ -11,80 +11,48 @@ namespace BrunoCampiol.Repository.Generic
 {
     public class Repository<T> : IDisposable, IRepository<T> where T : class
     {
-        private DatabaseContext databaseContext;
-
-        //public Repository()
-        //{
-        //    DbContextOptionsBuilder<ObdEmailContext> optionsBuilder = new DbContextOptionsBuilder<ObdEmailContext>();
-        //    optionsBuilder.UseSqlServer(@"Data Source=.;Initial Catalog=BrunoCampiol;Integrated Security=True");
-
-        //    Log.Entry(LogLevel.Warning, "Using default (localhost) repository connection");
-
-        //    databaseContext = new ObdEmailContext(optionsBuilder.Options);
-        //}
+        private DatabaseContext _dbContext;
 
         public Repository(DatabaseContext context)
         {
-            databaseContext = context;
+            _dbContext = context ?? throw new ArgumentNullException(nameof(context));
         }
-
-        //public void SetDbContext(DbContextOptionsBuilder<BrunoCampiolContext> optionsBuilder)
-        //{
-        //    databaseContext = new BrunoCampiolContext(optionsBuilder.Options);
-        //}
-
-        //public void SetDbContext(BrunoCampiolContext context)
-        //{
-        //    databaseContext = context;
-        //}
 
         public IQueryable<T> GetAll()
         {
-            if (databaseContext == null) throw new ArgumentNullException("ObdEmailContext", "Cannot be null");
-
-            IQueryable<T> query = databaseContext.Set<T>();
+            IQueryable<T> query = _dbContext.Set<T>();
             return query;
         }
 
         public IQueryable<T> Get(Expression<Func<T, bool>> predicate)
         {
-            if (databaseContext == null) throw new ArgumentNullException("ObdEmailContext", "Cannot be null");
-
-            IQueryable<T> query = databaseContext.Set<T>().Where(predicate);
+            IQueryable<T> query = _dbContext.Set<T>().Where(predicate);
             return query;
         }
 
         public void Add(T entity)
         {
-            if (databaseContext == null) throw new ArgumentNullException("ObdEmailContext", "Cannot be null");
-
-            databaseContext.Set<T>().Add(entity);
+            _dbContext.Set<T>().Add(entity);
         }
 
         public void Remove(T entity)
         {
-            if (databaseContext == null) throw new ArgumentNullException("ObdEmailContext", "Cannot be null");
-
-            databaseContext.Set<T>().Remove(entity);
+            _dbContext.Set<T>().Remove(entity);
         }
 
         public void Edit(T entity)
         {
-            if (databaseContext == null) throw new ArgumentNullException("ObdEmailContext", "Cannot be null");
-
-            databaseContext.Entry(entity).State = EntityState.Modified;
+            _dbContext.Entry(entity).State = EntityState.Modified;
         }
 
         public void Save()
         {
-            if (databaseContext == null) throw new ArgumentNullException("ObdEmailContext", "Cannot be null");
-
-            databaseContext.SaveChanges();
+            _dbContext.SaveChanges();
         }
 
         public void Dispose()
         {
-            databaseContext.Dispose();
+            _dbContext.Dispose();
         }
     }
 }
