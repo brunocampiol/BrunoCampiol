@@ -50,7 +50,7 @@ namespace BrunoCampiol.Common.Common
         /// <returns>A boolean if the text contains the value ignoring case</returns>
         public static bool ContainsIgnoreCase(this string text, string value)
         {
-            if (text.IndexOf(value, StringComparison.CurrentCultureIgnoreCase) >= 0)
+            if (text.IndexOf(value, StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 return true;
             }

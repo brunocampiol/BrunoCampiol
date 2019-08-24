@@ -25,8 +25,6 @@ namespace BrunoCampiol.Website.Pages.Projects
             List<VISITORS> visitorList = GetVisitorList(1, 50);
 
             visitorListString = GetVisitorListAsHtml(visitorList);
-
-            //GetPieData();
         }
 
         public IActionResult OnGetRow(int id)
@@ -51,17 +49,21 @@ namespace BrunoCampiol.Website.Pages.Projects
             foreach (VISITORS visitor in visitorList)
             {
                 rows += "<div class=\"row visitor-text\">";
-                rows += "<div class=\"col-2 ellipsis text-center responsive-table-text-visitors\">";
+                rows += "<div class=\"col-3 ellipsis text-center responsive-table-text-visitors\">";
                 rows += visitor.IP;
+                rows += "</div>";
+                rows += "<div class=\"col-1 ellipsis text-center responsive-table-text-visitors\">";
+                rows += " <span class=\"flag-icon flag-icon-" + visitor.COUNTRY.ToLower() + "\"></span>";
                 rows += "</div>";
                 rows += "<div class=\"col-2 ellipsis  text-center responsive-table-text-visitors\">";
                 rows += visitor.CREATED_ON_UTC.ToTimeAgo();
                 rows += "</div>";
-                rows += "<div class=\"col-2 ellipsis text-center responsive-table-text-visitors\">";
-                rows += visitor.COUNTRY;
-                rows += " <span class=\"flag-icon flag-icon-" + visitor.COUNTRY.ToLower() + "\"></span>";
+                rows += "<div class=\"col-1 ellipsis text-center responsive-table-text-visitors\">";
+                rows += GetOSIcon(visitor.CLIENT_OS);
+                rows += "  ";
+                rows += GetBrowserIcon(visitor.CLIENT_BROWSER);
                 rows += "</div>";
-                rows += "<div class=\"col-6 ellipsis responsive-table-text-visitors\">";
+                rows += "<div class=\"col-5 ellipsis responsive-table-text-visitors\">";
                 rows += visitor.REGION + " - " + visitor.CITY;
                 rows += "</div>";
                 rows += "</div>";
@@ -160,5 +162,88 @@ namespace BrunoCampiol.Website.Pages.Projects
 
             pieDataScript = script;
         }
+
+        private string GetOSIcon(string clientOS)
+        {
+            string windows = "<i class=\"fab fa-windows\"></i>";
+            string linux = "<i class=\"fab fa-linux\"></i>";
+            string apple = "<i class=\"fab fa-apple\"></i>";
+            string android = "<i class=\"fab fa-android\"></i>";
+            string unknown = "<i class=\"fas fa-question\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"" + clientOS + "\"></i>";
+
+            if (clientOS == null || clientOS.Length == 0)
+            {
+                return unknown;
+            }
+            if (clientOS.ContainsIgnoreCase("windows"))
+            {
+                return windows;
+            }
+            if (clientOS.ContainsIgnoreCase("linux") ||
+                clientOS.ContainsIgnoreCase("red hat") ||
+                clientOS.ContainsIgnoreCase("ubuntu") ||
+                clientOS.ContainsIgnoreCase("fedora"))
+            {
+                return linux;
+            }
+            if (clientOS.ContainsIgnoreCase("ios") ||
+                clientOS.ContainsIgnoreCase("mac"))
+            {
+                return apple;
+            }
+            if (clientOS.ContainsIgnoreCase("android"))
+            {
+                return android;
+            }
+
+            return unknown;
+        }
+
+        private string GetBrowserIcon(string browser)
+        {
+            string internetExplorer = "<i class=\"fab fa-internet-explorer\"></i>";
+            string chrome = "<i class=\"fab fa-chrome\"></i>";
+            string safari = "<i class=\"fab fa-safari\"></i>";
+            string firefox = "<i class=\"fab fa-firefox\"></i>";
+            string edge = "<i class=\"fab fa-edge\"></i>";
+            string opera = "<i class=\"fab fa-opera\"></i>";
+            string unknown = "<i class=\"fas fa-question\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"" + browser + "\"></i>";
+
+            if (browser == null || browser.Length == 0)
+            {
+                return unknown;
+            }
+            if (browser.ContainsIgnoreCase("ie") ||
+                browser.ContainsIgnoreCase("explorer"))
+            {
+                return internetExplorer;
+            }
+            if (browser.ContainsIgnoreCase("chrome") ||
+                browser.ContainsIgnoreCase("chromium"))
+            {
+                return chrome;
+            }
+            if (browser.ContainsIgnoreCase("safari"))
+            {
+                return safari;
+            }
+            if (browser.ContainsIgnoreCase("firefox") ||
+                browser.ContainsIgnoreCase("mozilla"))
+            {
+                return firefox;
+            }
+            if (browser.ContainsIgnoreCase("edge"))
+            {
+                return edge;
+            }
+            if (browser.ContainsIgnoreCase("opera"))
+            {
+                return opera;
+            }
+
+            return unknown;
+
+        }
+
     }
 }
