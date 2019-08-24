@@ -1,43 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using BrunoCampiol.Common.Common;
+﻿using BrunoCampiol.Common.Common;
 using BrunoCampiol.Common.Global;
 using BrunoCampiol.Common.Models;
 using BrunoCampiol.Repository.Context;
 using BrunoCampiol.Repository.Generic;
 using BrunoCampiol.Repository.Models;
 using BrunoCampiol.Service.Service;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Primitives;
+using System;
+using System.Linq;
+using System.Threading;
 
 namespace BrunoCampiol.Website.Pages
 {
     public class IndexModel : PageModel
     {
         private readonly ILogger _logger;
+        private readonly IConfiguration _configuration;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public IndexModel(IConfiguration configuration, ILogger<IndexModel> logger)
         {
+            _configuration = configuration;
             _logger = logger;
         }
 
         public void OnGet()
         {
-            //_logger.LogDebug("debug");
-            //_logger.LogTrace("ttrace");
-            //_logger.LogInformation("info");
-            //_logger.LogWarning("warning");
-            //_logger.LogError("error");
-            //_logger.LogCritical("critical");
-
             // Ip and UserAgent shall not be queried in thread
             string userAgent = Request.Headers["User-Agent"].ToString();
             string ipAddress = Request.HttpContext.Connection.RemoteIpAddress.ToString();
@@ -73,13 +63,8 @@ namespace BrunoCampiol.Website.Pages
             {
                 try
                 {
-                    WebClient2 webClient = new WebClient2("http://ip-api.com/json/" + ipAddress);
-
-                    WebsiteService service = new WebsiteService(webClient);
-
-                    string jsonString = service.WebClient.HttpGet().Result;
-
-                    VISITORS visitor = service.GetVisitorObjectFromJsonString(jsonString);
+                    IpGeolocationService ipService = new IpGeolocationService(_configuration);
+                    VISITORS visitor = ipService.GetVisitorInformation(ipAddress);
 
                     visitor.CLIENT_HEADERS = headers;
                     visitor.CLIENT_BROWSER = browserName;

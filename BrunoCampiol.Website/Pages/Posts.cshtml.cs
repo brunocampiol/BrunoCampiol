@@ -55,33 +55,35 @@ namespace BrunoCampiol.Website.Pages
             string browserName = StaticLibrary.GetBrowserName(userAgent);
             string osName = StaticLibrary.GetOperationalSystemName(userAgent);
 
+            // TODO: fix this
             // Gets IP-based information
-            string host = _configuration["IpApiService:Host"];
-            string resource = _configuration["IpApiService:Resource"];
+            //string host = _configuration["IpApiService:Host"];
+            //string resource = _configuration["IpApiService:Resource"];
 
-            WebClient2 webClient = new WebClient2(host);
-            string jsonData = webClient.HttpGet(resource + ipAddress).Result;
+            
+            //WebClient2 webClient = new WebClient2(host);
+            //string jsonData = webClient.HttpGet(resource + ipAddress).Result;
 
-            JObject jObject = JObject.Parse(jsonData);
+            //JObject jObject = JObject.Parse(jsonData);
 
-            POSTS post = new POSTS();
-            post.USER_POST = postComments;
-            post.USER_NAME = User.Identity.Name;
-            post.USER_MEDIA = User.Identity.AuthenticationType;
-            post.USER_IP = ipAddress;
-            post.USER_OS = osName;
-            post.USER_BROWSER = browserName;
-            post.USER_COUNTRY = (string)jObject["countryCode"];
-            post.CREATED_ON_UTC = DateTime.UtcNow;
+            //POSTS post = new POSTS();
+            //post.USER_POST = postComments;
+            //post.USER_NAME = User.Identity.Name;
+            //post.USER_MEDIA = User.Identity.AuthenticationType;
+            //post.USER_IP = ipAddress;
+            //post.USER_OS = osName;
+            //post.USER_BROWSER = browserName;
+            //post.USER_COUNTRY = (string)jObject["countryCode"];
+            //post.CREATED_ON_UTC = DateTime.UtcNow;
 
-            var connectionString = GlobalSettings.Instance.ConnectionString;
-            var options = new DbContextOptionsBuilder<DatabaseContext>().UseSqlServer(connectionString).Options;
-            DatabaseContext context = new DatabaseContext(options);
-            Repository<POSTS> repository = new Repository<POSTS>(context);
+            //var connectionString = GlobalSettings.Instance.ConnectionString;
+            //var options = new DbContextOptionsBuilder<DatabaseContext>().UseSqlServer(connectionString).Options;
+            //DatabaseContext context = new DatabaseContext(options);
+            //Repository<POSTS> repository = new Repository<POSTS>(context);
 
-            repository.Add(post);
-            repository.Save();
-            repository.Dispose();
+            //repository.Add(post);
+            //repository.Save();
+            //repository.Dispose();
         }
     }
 }
