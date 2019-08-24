@@ -19,7 +19,7 @@ namespace BrunoCampiol.UnitTest.Service
         }
 
         [Fact]
-        public void WhenValidIP_AndPermissionGranted_ExpectUserInContext()
+        public void WhenValidIP_ExpectValidVisitor()
         {
             //// Assemble
             //RestResponse response = new RestResponse();
