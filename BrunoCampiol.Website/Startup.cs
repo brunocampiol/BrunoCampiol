@@ -5,8 +5,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.IO;
 
 namespace BrunoCampiol.Website
 {
@@ -14,39 +12,16 @@ namespace BrunoCampiol.Website
     {
         public IConfiguration Configuration { get; }
 
-        public Startup(IConfiguration configuration)
+        public Startup(IHostingEnvironment env)
         {
-#if DEBUG
-            GlobalSettings.Instance.BuildFlavor = "DEBUG";
-            Configuration = new ConfigurationBuilder()
-                                .SetBasePath(Directory.GetCurrentDirectory())
-                                .AddJsonFile("appsettings.Development.json", optional: false, reloadOnChange: true)
-                                .Build();
-#else
-            GlobalSettings.Instance.BuildFlavor = "RELEASE";
-            Configuration = new ConfigurationBuilder()
-                                .SetBasePath(Directory.GetCurrentDirectory())
-                                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                                .Build();
-#endif
+            var builder = new ConfigurationBuilder()
+              .SetBasePath(env.ContentRootPath)
+              .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
+              .AddEnvironmentVariables();
 
-            // TODO: check each value is set so we wont have null exception
-            if (String.IsNullOrEmpty(Configuration["AppSettingsFlavor"])) throw new ArgumentException("Cannot be null or empty", "AppSettingsFlavor");
-            if (String.IsNullOrEmpty(Configuration["ConnectionString"])) throw new ArgumentException("Cannot be null or empty", "ConnectionString");
+            Configuration = builder.Build();
 
-            // TODO: set all configurations here
-            GlobalSettings.Instance.AppSettingsFlavor = Configuration["AppSettingsFlavor"];
             GlobalSettings.Instance.ConnectionString = Configuration["ConnectionString"];
-
-            // Does check if we have mismatch stuff
-            if (GlobalSettings.Instance.BuildFlavor == "DEBUG" && GlobalSettings.Instance.AppSettingsFlavor != "DEVELOPMENT")
-            {
-                throw new Exception("Cannot use DEBUG code with app settings different then DEVELOPMENT");
-            }
-            if (GlobalSettings.Instance.BuildFlavor == "RELEASE" && GlobalSettings.Instance.AppSettingsFlavor != "PRODUCTION")
-            {
-                throw new Exception("Cannot use RELEASE code with app settings different then PRODUCTION");
-            }
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -63,7 +38,8 @@ namespace BrunoCampiol.Website
                 options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             })
-            .AddFacebook(options => {
+            .AddFacebook(options =>
+            {
                 options.AppId = Configuration["Facebook:AppId"];
                 options.AppSecret = Configuration["Facebook:AppSecret"];
             })
@@ -77,17 +53,12 @@ namespace BrunoCampiol.Website
                 options.ConsumerKey = Configuration["Twitter:ApiKey"];
                 options.ConsumerSecret = Configuration["Twitter:ApiSecret"];
             })
-            .AddCookie(options => {
+            .AddCookie(options =>
+            {
                 options.LoginPath = "/Identity";
             });
 
             services.AddMvc();
-
-            //services.AddMvc()
-            //    .AddRazorPagesOptions(options =>
-            //    {
-            //        options.Conventions.AuthorizeFolder("/Identity").AllowAnonymousToPage("/Identity/Index");
-            //    });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -95,17 +66,12 @@ namespace BrunoCampiol.Website
         {
             if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
             else app.UseExceptionHandler("/Error");
-            
+
             app.UseAuthentication();
 
             app.UseStaticFiles(GetStaticFileConfiguration());
 
             app.UseMvc();
-
-            // Sets the environment name based on build flavor
-            // This helps razor pages to get right environment
-            if (GlobalSettings.Instance.BuildFlavor == "DEBUG") env.EnvironmentName = "Development";
-            else env.EnvironmentName = "Production";
         }
 
         private StaticFileOptions GetStaticFileConfiguration()

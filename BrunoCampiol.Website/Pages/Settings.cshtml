@@ -1,0 +1,33 @@
+﻿@page
+@model BrunoCampiol.Website.Pages.SettingsModel
+
+
+<div class="jumbotron text-center">
+    <h1 class="align-middle">Bruno Settings <span class="fas fa-cogs" style="color:DodgerBlue;"></span></h1>
+</div>
+
+<br />
+
+<div class="container">
+    <div class="table-responsive">
+        <table class="table global-settings-table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Setting</th>
+                    <th scope="col">Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ((List<(int Order, string Key, string Value)>)ViewData["SettingsList"]))
+                {
+                    <tr>
+                        <th scope="row">@item.Order</th>
+                        <td>@item.Key</td>
+                        <td>@item.Value</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
