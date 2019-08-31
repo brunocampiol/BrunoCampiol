@@ -1,14 +1,11 @@
 ﻿using BrunoCampiol.Common.Common;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace BrunoCampiol.UnitTest.Common
 {
-    public class TestStaticLibrary
+    public class StaticLibraryTest
     {
-
         [Fact]
         public void TestToTimeAgo_ExpectTimeAgo_When1SecondAgo()
         {

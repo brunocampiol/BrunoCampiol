@@ -6,7 +6,7 @@ using Xunit;
 
 namespace BrunoCampiol.UnitTest.Common
 {
-    public class TestExtensions
+    public class ExtensionsTest
     {
         [Fact]
         public void TestAllExceptionMessages()
