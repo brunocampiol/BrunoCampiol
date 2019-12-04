@@ -19,13 +19,16 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in ((List<(int Order, string Key, string Value)>)ViewData["SettingsList"]))
+                @{ int order = 1; }
+                @foreach (var item in ((List<(string Key, string Value)>)ViewData["SettingsList"]))
                 {
                     <tr>
-                        <th scope="row">@item.Order</th>
+                        <th scope="row">@order</th>
                         <td>@item.Key</td>
                         <td>@item.Value</td>
                     </tr>
+
+                    order++;
                 }
             </tbody>
         </table>

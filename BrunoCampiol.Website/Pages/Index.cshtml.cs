@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System;
 using System.Linq;
 using System.Threading;
@@ -17,13 +18,14 @@ namespace BrunoCampiol.Website.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger _logger;
-        private readonly IConfiguration _configuration;
+        private readonly AppSettings _appSettings;
+        private readonly DatabaseContext _databaseContext;
+        //private readonly ILogger _logger;
 
-        public IndexModel(IConfiguration configuration, ILogger<IndexModel> logger)
+        public IndexModel(IOptions<AppSettings> appSettings, DatabaseContext databaseContext)
         {
-            _configuration = configuration;
-            _logger = logger;
+            _appSettings = appSettings.Value;
+            _databaseContext = databaseContext;
         }
 
         public void OnGet()
@@ -49,12 +51,8 @@ namespace BrunoCampiol.Website.Pages
 
             // Checks if we already have it locally ; default is true
             bool isIpStored = true;
-            var connectionString = GlobalSettings.Instance.ConnectionString;
-
-            var options = new DbContextOptionsBuilder<DatabaseContext>().UseSqlServer(connectionString).Options;
-
-            DatabaseContext context = new DatabaseContext(options);
-            Repository<VISITORS> repository = new Repository<VISITORS>(context);
+            
+            Repository<VISITORS> repository = new Repository<VISITORS>(_databaseContext);
 
             isIpStored = repository.Get(v => v.IP == ipAddress).Any();
 
@@ -63,7 +61,7 @@ namespace BrunoCampiol.Website.Pages
             {
                 try
                 {
-                    IpGeolocationService ipService = new IpGeolocationService(_configuration);
+                    IpGeolocationService ipService = new IpGeolocationService(_appSettings.IPServiceAPIProvider);
                     VISITORS visitor = ipService.GetVisitorInformation(ipAddress);
 
                     visitor.CLIENT_HEADERS = headers;
@@ -77,11 +75,12 @@ namespace BrunoCampiol.Website.Pages
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogCritical(ex, ex.AllExceptionMessages(), null);
+                    // TODO: fix this
+                    //_logger.LogCritical(ex, ex.AllExceptionMessages(), null);
 
-                    using (DatabaseContext logContext = new DatabaseContext(options))
+                    using (_databaseContext)
                     {
-                        Repository<LOGS> repo = new Repository<LOGS>(logContext);
+                        Repository<LOGS> repo = new Repository<LOGS>(_databaseContext);
 
                         LOGS log = new LOGS();
                         log.LEVEL = LogEntryLevel.ERROR.ToString();

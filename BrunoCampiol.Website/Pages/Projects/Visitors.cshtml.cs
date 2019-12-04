@@ -20,6 +20,14 @@ namespace BrunoCampiol.Website.Pages.Projects
 
         public string pieDataScript { get; private set; }
 
+
+        private readonly DatabaseContext _databaseContext;
+
+        public VisitorsModel(DatabaseContext databaseContext)
+        {
+            _databaseContext = databaseContext;
+        }
+
         public void OnGet()
         {
             List<VISITORS> visitorList = GetVisitorList(1, 50);
@@ -75,12 +83,8 @@ namespace BrunoCampiol.Website.Pages.Projects
         private List<VISITORS> GetVisitorList(int page, int pageSize)
         {
             var htmlString = String.Empty;
-            var connectionString = GlobalSettings.Instance.ConnectionString;
 
-            var options = new DbContextOptionsBuilder<DatabaseContext>().UseSqlServer(connectionString).Options;
-
-            DatabaseContext context = new DatabaseContext(options);
-            Repository<VISITORS> repository = new Repository<VISITORS>(context);
+            Repository<VISITORS> repository = new Repository<VISITORS>(_databaseContext);
 
             IQueryable<VISITORS> visitorListQuery = repository.GetAll().OrderByDescending(visitor => visitor.CREATED_ON_UTC).Skip((page - 1) * pageSize).Take(pageSize);
             List<VISITORS> listVisitors = visitorListQuery.ToList();
@@ -108,12 +112,7 @@ namespace BrunoCampiol.Website.Pages.Projects
 
         private List<CountryChartData> GetDatabasePieData()
         {
-            var connectionString = GlobalSettings.Instance.ConnectionString;
-
-            var options = new DbContextOptionsBuilder<DatabaseContext>().UseSqlServer(connectionString).Options;
-
-            DatabaseContext context = new DatabaseContext(options);
-            Repository<VISITORS> repository = new Repository<VISITORS>(context);
+            Repository<VISITORS> repository = new Repository<VISITORS>(_databaseContext);
 
             IQueryable<CountryChartData> visitorListQuery = repository.GetAll()
                                                                 .GroupBy(group => group.COUNTRY)

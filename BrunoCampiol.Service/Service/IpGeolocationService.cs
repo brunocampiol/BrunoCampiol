@@ -1,4 +1,5 @@
-﻿using BrunoCampiol.Repository.Models;
+﻿using BrunoCampiol.Common.Models;
+using BrunoCampiol.Repository.Models;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
 using RestSharp;
@@ -13,14 +14,11 @@ namespace BrunoCampiol.Service.Service
         private readonly string _baseUrl;
         private readonly string _resource;
 
-        public IpGeolocationService(IConfiguration configuration)
+        public IpGeolocationService(IPServiceAPIProvider settings)
         {
-            if (String.IsNullOrWhiteSpace(configuration["IpApiService:Host"])) throw new ArgumentException("Cannot be null, empty or white space", "configuration[\"IpApiService:Host\"]");
-            if (String.IsNullOrWhiteSpace(configuration["IpApiService:Resource"])) throw new ArgumentException("Cannot be null, empty or white space", "configuration[\"IpApiService:Resource\"]");
-
             //http://ip-api.com/json/200.32.1.23.1
-            _baseUrl = configuration["IpApiService:Host"];
-            _resource = configuration["IpApiService:Resource"];
+            _baseUrl = settings.Host;
+            _resource = settings.Resource;
             RestClient = new RestClient(_baseUrl);
         }
 
