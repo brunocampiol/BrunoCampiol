@@ -27,7 +27,7 @@ namespace BrunoCampiol.IntegrationTest.Service
         public void WhenValidIP_ExpectValidVisitor()
         {
             // Assemble
-            IpGeolocationService service = new IpGeolocationService(_configuration.Object);
+            IpGeolocationService2 service = new IpGeolocationService2(_configuration.Object);
             IPAddress address = GetRandomIP();
 
             // Act

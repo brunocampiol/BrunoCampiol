@@ -1,6 +1,9 @@
 using BrunoCampiol.Common.Global;
+using BrunoCampiol.Common.Logger;
 using BrunoCampiol.Common.Models;
 using BrunoCampiol.Repository.Context;
+using BrunoCampiol.Service.Interface;
+using BrunoCampiol.Service.Service;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,10 +32,13 @@ namespace BrunoCampiol.Website
             services.AddDbContext<DatabaseContext>(opt => opt.UseSqlServer(connectionString));
 
             // IOptions configuration
-            services.Configure<AppSettings>(Configuration);
+            ConfigureIOptions(services);
 
             // IoC
             ConfigureIoC(services);
+
+            // Register Services
+            RegisterServices(services);
 
 
             // The AntiForgery Token needs to be added and before services.AddMvc()
@@ -112,6 +118,18 @@ namespace BrunoCampiol.Website
             //services.AddScoped(typeof(IRabbitEventConsumer<>), typeof(RabbitEventConsumer<>));
             //services.AddScoped<IRabbitConsumerService, ObdTextMQConsumerService>();
             //services.AddScoped(typeof(IDataManager), typeof(SqlDataManager));
+        }
+
+        private void ConfigureIOptions(IServiceCollection services)
+        {
+            services.Configure<AppSettings>(Configuration);
+            services.Configure<IPServiceAPIProvider>(Configuration.GetSection("IPServiceAPIProvider"));
+        }
+
+        private void RegisterServices(IServiceCollection services)
+        {
+            services.AddScoped<ILogger, Logger>();
+            services.AddScoped<IIPGeolocationService, IPGeolocationService>();
         }
     }
 }

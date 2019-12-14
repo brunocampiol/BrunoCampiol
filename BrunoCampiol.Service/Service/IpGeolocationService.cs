@@ -1,6 +1,8 @@
 ﻿using BrunoCampiol.Common.Models;
 using BrunoCampiol.Repository.Models;
+using BrunoCampiol.Service.Interface;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
@@ -8,17 +10,18 @@ using System.Net;
 
 namespace BrunoCampiol.Service.Service
 {
-    public class IpGeolocationService
+    public class IPGeolocationService : IIPGeolocationService
     {
         public IRestClient RestClient;
         private readonly string _baseUrl;
         private readonly string _resource;
 
-        public IpGeolocationService(IPServiceAPIProvider settings)
+        //http://ip-api.com/json/200.32.1.23.1
+
+        public IPGeolocationService(IOptions<IPServiceAPIProvider> settingsProvider)
         {
-            //http://ip-api.com/json/200.32.1.23.1
-            _baseUrl = settings.Host;
-            _resource = settings.Resource;
+            _baseUrl = settingsProvider.Value.Host;
+            _resource = settingsProvider.Value.Resource;
             RestClient = new RestClient(_baseUrl);
         }
 
