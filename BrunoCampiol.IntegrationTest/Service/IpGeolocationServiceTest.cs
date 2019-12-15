@@ -1,6 +1,9 @@
-﻿using BrunoCampiol.Repository.Models;
+﻿using BrunoCampiol.Common.Models;
+using BrunoCampiol.Repository.Models;
+using BrunoCampiol.Service.Interface;
 using BrunoCampiol.Service.Service;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -12,22 +15,20 @@ namespace BrunoCampiol.IntegrationTest.Service
 {
     public class IpGeolocationServiceTest
     {
-        private readonly Mock<IConfiguration> _configuration;
+        private readonly IOptions<IPServiceAPIProvider> _configuration;
         private static readonly string _hostUrl = "http://ip-api.com";
         private static readonly string _hostResource = "/json/";
 
         public IpGeolocationServiceTest()
         {
-            _configuration = new Mock<IConfiguration>();
-            _configuration.Setup(x => x["IpApiService:Host"]).Returns(_hostUrl);
-            _configuration.Setup(x => x["IpApiService:Resource"]).Returns(_hostResource);
+            _configuration = Options.Create<IPServiceAPIProvider>(GetIPServiceAPIProviderTest());
         }
 
         [Fact]
         public void WhenValidIP_ExpectValidVisitor()
         {
             // Assemble
-            IpGeolocationService2 service = new IpGeolocationService2(_configuration.Object);
+            IIPGeolocationService service = new IPGeolocationService(_configuration);
             IPAddress address = GetRandomIP();
 
             // Act
@@ -41,6 +42,15 @@ namespace BrunoCampiol.IntegrationTest.Service
             Assert.NotNull(visitor.IP);
             Assert.NotNull(visitor.ISP);
             Assert.NotNull(visitor.REGION);
+        }
+
+        private IPServiceAPIProvider GetIPServiceAPIProviderTest()
+        {
+            IPServiceAPIProvider provider = new IPServiceAPIProvider();
+            provider.Host = _hostUrl;
+            provider.Resource = _hostResource;
+
+            return provider;
         }
 
         private IPAddress GetRandomIP()
