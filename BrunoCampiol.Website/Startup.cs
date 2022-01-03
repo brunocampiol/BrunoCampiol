@@ -1,14 +1,11 @@
-using BrunoCampiol.Common.Global;
 using BrunoCampiol.Common.Logger;
 using BrunoCampiol.Common.Models;
 using BrunoCampiol.Repository.Context;
 using BrunoCampiol.Service.Interface;
 using BrunoCampiol.Service.Service;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.StaticFiles;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -29,7 +26,9 @@ namespace BrunoCampiol.Website
         public void ConfigureServices(IServiceCollection services)
         {
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<DatabaseContext>(opt => opt.UseSqlServer(connectionString));
+
+            // services.AddDbContext<DatabaseContext>(opt => opt.UseSqlServer(connectionString));
+            services.AddDbContext<DatabaseContext>();
 
             // IOptions configuration
             ConfigureIOptions(services);
@@ -72,7 +71,11 @@ namespace BrunoCampiol.Website
             //    options.LoginPath = "/Identity";
             //});
 
-            services.AddMvc();
+
+            //services.AddControllersWithViews();
+            services.AddRazorPages();
+
+            //services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -84,8 +87,16 @@ namespace BrunoCampiol.Website
             //app.UseAuthentication();
 
             app.UseStaticFiles(GetStaticFileConfiguration());
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapRazorPages();
+                endpoints.MapDefaultControllerRoute();
+                // Which is the same as the template
+                //endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+            });
 
-            app.UseMvc();
+            //app.UseMvc();
         }
 
         private StaticFileOptions GetStaticFileConfiguration()

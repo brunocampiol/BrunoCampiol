@@ -32,18 +32,18 @@ namespace BrunoCampiol.Website.Pages
 
         public void OnGet()
         {
-            var connectionString = GlobalSettings.Instance.ConnectionString;
-            var options = new DbContextOptionsBuilder<DatabaseContext>().UseSqlServer(connectionString).Options;
-            DatabaseContext context = new DatabaseContext(options);
-            Repository<POSTS> repository = new Repository<POSTS>(context);
+            //var connectionString = GlobalSettings.Instance.ConnectionString;
+            //var options = new DbContextOptionsBuilder<DatabaseContext>().UseSqlServer(connectionString).Options;
+            //DatabaseContext context = new DatabaseContext(options);
+            //Repository<POSTS> repository = new Repository<POSTS>(context);
 
-            int page = 1;
-            int pageSize = 50;
+            //int page = 1;
+            //int pageSize = 50;
 
-            IQueryable<POSTS> postQuery = repository.GetAll().OrderByDescending(post => post.CREATED_ON_UTC).Skip((page - 1) * pageSize).Take(pageSize);
-            PostList = postQuery.ToList();
+            //IQueryable<POSTS> postQuery = repository.GetAll().OrderByDescending(post => post.CREATED_ON_UTC).Skip((page - 1) * pageSize).Take(pageSize);
+            //PostList = postQuery.ToList();
 
-            repository.Dispose();
+            //repository.Dispose();
         }
 
         public void OnPost()
