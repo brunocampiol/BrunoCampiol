@@ -13,10 +13,10 @@ namespace BrunoCampiol.Website
 {
     public class Startup
     {
-        public IHostingEnvironment HostingEnvironment { get; set; }
+        public IWebHostEnvironment HostingEnvironment { get; set; }
         public IConfiguration Configuration { get; }
 
-        public Startup(IHostingEnvironment hostingEnvironment, IConfiguration configuration)
+        public Startup(IWebHostEnvironment hostingEnvironment, IConfiguration configuration)
         {
             Configuration = configuration;
             HostingEnvironment = hostingEnvironment;
@@ -79,10 +79,13 @@ namespace BrunoCampiol.Website
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
-            else app.UseExceptionHandler("/Error");
+            //if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
+            //else app.UseExceptionHandler("/Error");
+
+            app.UseDeveloperExceptionPage();
+            //app.UseExceptionHandler("/Error");
 
             //app.UseAuthentication();
 

@@ -16,12 +16,15 @@ namespace BrunoCampiol.Service.Service
         private readonly string _baseUrl;
         private readonly string _resource;
 
-        //http://ip-api.com/json/200.32.1.23.1
+        // http://ip-api.com/json/200.32.1.23.1
 
         public IPGeolocationService(IOptions<IPServiceAPIProvider> settingsProvider)
         {
+            //    "Resource": "/json/"
             _baseUrl = settingsProvider.Value.Host;
-            _resource = settingsProvider.Value.Resource;
+            _resource = "/json/";
+            //_resource = settingsProvider.Value.Resource;
+
             RestClient = new RestClient(_baseUrl);
         }
 
