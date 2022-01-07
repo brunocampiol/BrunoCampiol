@@ -6,6 +6,7 @@ using BrunoCampiol.Service.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -25,9 +26,8 @@ namespace BrunoCampiol.Website
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = _configuration.GetConnectionString("DefaultConnection");
-            // services.AddDbContext<DatabaseContext>(opt => opt.UseSqlServer(connectionString));
-            services.AddDbContext<DatabaseContext>();
+            var connectionString = _configuration.GetConnectionString("Default");
+            services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connectionString));
 
             // IOptions configuration
             ConfigureIOptions(services);
@@ -119,7 +119,6 @@ namespace BrunoCampiol.Website
 
             services.AddScoped<ILogger, Logger>();
             services.AddScoped<IIPGeolocationService, IPGeolocationService>();
-            // TODO fix the 
         }
     }
 }
