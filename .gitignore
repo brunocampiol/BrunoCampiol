@@ -13,7 +13,7 @@
 *.sln.docstates
 *.pubxml
 *.pubxml.user
-appsettings.json
+appsettings.PROD.json
 appsettings.Development.json
 PROD.scmp
 
