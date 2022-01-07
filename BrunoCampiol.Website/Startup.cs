@@ -115,6 +115,8 @@ namespace BrunoCampiol.Website
 
         private void RegisterServices(IServiceCollection services)
         {
+            services.AddHttpClient();
+
             services.AddScoped<ILogger, Logger>();
             services.AddScoped<IIPGeolocationService, IPGeolocationService>();
             // TODO fix the 
