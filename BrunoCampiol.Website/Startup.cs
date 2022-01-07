@@ -13,28 +13,24 @@ namespace BrunoCampiol.Website
 {
     public class Startup
     {
-        public IWebHostEnvironment HostingEnvironment { get; set; }
-        public IConfiguration Configuration { get; }
+        private IWebHostEnvironment _hostingEnvironment;
+        private IConfiguration _configuration;
 
         public Startup(IWebHostEnvironment hostingEnvironment, IConfiguration configuration)
         {
-            Configuration = configuration;
-            HostingEnvironment = hostingEnvironment;
+            _configuration = configuration;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = Configuration.GetConnectionString("DefaultConnection");
-
+            var connectionString = _configuration.GetConnectionString("DefaultConnection");
             // services.AddDbContext<DatabaseContext>(opt => opt.UseSqlServer(connectionString));
             services.AddDbContext<DatabaseContext>();
 
             // IOptions configuration
             ConfigureIOptions(services);
-
-            // IoC
-            ConfigureIoC(services);
 
             // Register Services
             RegisterServices(services);
@@ -79,7 +75,7 @@ namespace BrunoCampiol.Website
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
             //if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
             //else app.UseExceptionHandler("/Error");
@@ -111,39 +107,17 @@ namespace BrunoCampiol.Website
             return new StaticFileOptions { ContentTypeProvider = provider };
         }
 
-        private void ConfigureIoC(IServiceCollection services)
-        {
-            // OData
-            //services.AddOData();
-
-            // ASP.NET HttpContext dependency
-            //services.AddHttpContextAccessor();
-
-            //// Transient
-            //services.AddTransient<SMSModelBuilder>();
-            //services.AddTransient<ICampaignManagementService, CampaignManagementService>();
-            //services.AddTransient<ITemplateManagementService, TemplateManagementService>();
-            //services.AddTransient<ILenghtValidations, LenghtValidations>();
-
-            //// Scoped
-            //services.AddScoped<IHandler<DomainNotification>, DomainNotificationHandler>();
-            //services.AddScoped(typeof(IRabbitProducerService<>), typeof(RabbitProducerService<>));
-            //services.AddScoped(typeof(IRabbitConnectionSettings<>), typeof(RabbitConnectionSettings<>));
-            //services.AddScoped(typeof(IRabbitEventConsumer<>), typeof(RabbitEventConsumer<>));
-            //services.AddScoped<IRabbitConsumerService, ObdTextMQConsumerService>();
-            //services.AddScoped(typeof(IDataManager), typeof(SqlDataManager));
-        }
-
         private void ConfigureIOptions(IServiceCollection services)
         {
-            services.Configure<AppSettings>(Configuration);
-            services.Configure<IPServiceAPIProvider>(Configuration.GetSection("IPServiceAPIProvider"));
+            services.Configure<AppSettings>(_configuration);
+            services.Configure<IPServiceAPIProvider>(_configuration.GetSection("IPServiceAPIProvider"));
         }
 
         private void RegisterServices(IServiceCollection services)
         {
             services.AddScoped<ILogger, Logger>();
             services.AddScoped<IIPGeolocationService, IPGeolocationService>();
+            // TODO fix the 
         }
     }
 }

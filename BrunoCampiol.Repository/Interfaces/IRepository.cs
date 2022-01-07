@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace BrunoCampiol.Repository.Interfaces
 {
@@ -10,7 +8,11 @@ namespace BrunoCampiol.Repository.Interfaces
     {
         IQueryable<T> GetAll();
 
+        IQueryable<T> GetAllNoTrack();
+
         IQueryable<T> Get(Expression<Func<T, bool>> predicate);
+
+        IQueryable<T> GetNoTrack(Expression<Func<T, bool>> predicate);
 
         void Add(T entity);
 

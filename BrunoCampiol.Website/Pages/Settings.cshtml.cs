@@ -1,7 +1,6 @@
 ﻿using BrunoCampiol.Common.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -15,12 +14,12 @@ namespace BrunoCampiol.Website.Pages
     public class SettingsModel : PageModel
     {
         private readonly AppSettings _appSettings;
-        private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IWebHostEnvironment _hostEnv;
 
-        public SettingsModel(IHostingEnvironment hostingEnvironment, IOptions<AppSettings> appSettings)
+        public SettingsModel(IWebHostEnvironment hostingEnvironment, IOptions<AppSettings> appSettings)
         {
             _appSettings = appSettings.Value;
-            _hostingEnvironment = hostingEnvironment;
+            _hostEnv = hostingEnvironment;
         }
 
         public void OnGet()
@@ -42,7 +41,7 @@ namespace BrunoCampiol.Website.Pages
             ViewData["SettingsList"] =
             new List<(string Key, string Value)>
             {
-                ("EnvironmentName", _hostingEnvironment.EnvironmentName),
+                ("EnvironmentName", _hostEnv.EnvironmentName),
                 ("TargetFrameWork", framework),
                 ("PlatformVersion", platformVersion),
                 ("Database", dataBase),

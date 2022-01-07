@@ -2,10 +2,8 @@
 using BrunoCampiol.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace BrunoCampiol.Repository.Generic
 {
@@ -24,9 +22,21 @@ namespace BrunoCampiol.Repository.Generic
             return query;
         }
 
+        public IQueryable<T> GetAllNoTrack()
+        {
+            IQueryable<T> query = _dbContext.Set<T>().AsNoTracking();
+            return query;
+        }
+
         public IQueryable<T> Get(Expression<Func<T, bool>> predicate)
         {
             IQueryable<T> query = _dbContext.Set<T>().Where(predicate);
+            return query;
+        }
+
+        public IQueryable<T> GetNoTrack(Expression<Func<T, bool>> predicate)
+        {
+            IQueryable<T> query = _dbContext.Set<T>().AsNoTracking().Where(predicate);
             return query;
         }
 

@@ -1,19 +1,13 @@
 ﻿using BrunoCampiol.Common.Common;
-using BrunoCampiol.Common.Global;
 using BrunoCampiol.Common.Logger;
 using BrunoCampiol.Common.Models;
 using BrunoCampiol.Repository.Context;
 using BrunoCampiol.Repository.Generic;
 using BrunoCampiol.Repository.Models;
 using BrunoCampiol.Service.Interface;
-using BrunoCampiol.Service.Service;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
 using System;
 using System.Linq;
-using System.Threading;
 
 namespace BrunoCampiol.Website.Pages
 {

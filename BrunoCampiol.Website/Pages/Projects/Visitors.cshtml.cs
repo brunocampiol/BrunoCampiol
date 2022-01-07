@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using BrunoCampiol.Common.Common;
-using BrunoCampiol.Common.Global;
+﻿using BrunoCampiol.Common.Common;
 using BrunoCampiol.Common.Models;
 using BrunoCampiol.Repository.Context;
 using BrunoCampiol.Repository.Generic;
 using BrunoCampiol.Repository.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 
 namespace BrunoCampiol.Website.Pages.Projects
 {
@@ -86,7 +84,7 @@ namespace BrunoCampiol.Website.Pages.Projects
 
             Repository<VISITORS> repository = new Repository<VISITORS>(_databaseContext);
 
-            IQueryable<VISITORS> visitorListQuery = repository.GetAll().OrderByDescending(visitor => visitor.CREATED_ON_UTC).Skip((page - 1) * pageSize).Take(pageSize);
+            IQueryable<VISITORS> visitorListQuery = repository.GetAllNoTrack().OrderByDescending(visitor => visitor.CREATED_ON_UTC).Skip((page - 1) * pageSize).Take(pageSize);
             List<VISITORS> listVisitors = visitorListQuery.ToList();
 
             return listVisitors;
@@ -114,7 +112,7 @@ namespace BrunoCampiol.Website.Pages.Projects
         {
             Repository<VISITORS> repository = new Repository<VISITORS>(_databaseContext);
 
-            IQueryable<CountryChartData> visitorListQuery = repository.GetAll()
+            IQueryable<CountryChartData> visitorListQuery = repository.GetAllNoTrack()
                                                                 .GroupBy(group => group.COUNTRY)
                                                                 .Select(item => new CountryChartData { Country = item.First().COUNTRY,
                                                                                                         Count = item.Count() });

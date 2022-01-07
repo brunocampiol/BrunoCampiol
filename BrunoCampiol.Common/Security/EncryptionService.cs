@@ -85,7 +85,7 @@ namespace BrunoCampiol.Common.Security
 
                 ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
 
-                // TODO: [Security Meeting] Rafael will research how to remove the usage of "MemoryStream", 
+                // TODO: [Security Meeting] research how to remove the usage of "MemoryStream", 
                 // if that does not work, we need to talk again with the security Team.
                 using (MemoryStream msEncrypt = new MemoryStream())
                 {
