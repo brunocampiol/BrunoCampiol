@@ -2,7 +2,7 @@
 using BrunoCampiol.Repository.Models;
 using BrunoCampiol.Service.Interface;
 using BrunoCampiol.Service.Service;
-using Microsoft.Extensions.Http;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System;
 using System.Net;
@@ -13,20 +13,24 @@ namespace BrunoCampiol.IntegrationTest.Service
 {
     public class IpGeolocationServiceTest
     {
-        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly ServiceProvider _serviceProvider;
         private readonly IOptions<IPServiceAPIProvider> _configuration;
         private const string _hostUrl = "http://ip-api.com";
 
         public IpGeolocationServiceTest()
         {
             _configuration = Options.Create(new IPServiceAPIProvider() { Host = _hostUrl });
+            var serviceCollection = new ServiceCollection();
+            serviceCollection.AddHttpClient();
+            _serviceProvider = serviceCollection.BuildServiceProvider();
         }
 
         [Fact]
         public void WhenValidIP_ExpectValidVisitor()
         {
             // Assemble
-            IIPGeolocationService service = new IPGeolocationService(_configuration);
+            var httpClientFactory = _serviceProvider.GetRequiredService<IHttpClientFactory>();
+            IIPGeolocationService service = new IPGeolocationService(_configuration, httpClientFactory);
             IPAddress address = GetRandomIP();
 
             // Act
