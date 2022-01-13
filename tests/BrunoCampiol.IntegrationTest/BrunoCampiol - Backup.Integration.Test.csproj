@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\BrunoCampiol.Website\BrunoCampiol.UI.Web.csproj" />
+    <ProjectReference Include="..\..\src\BrunoCampiol.UI.Web\BrunoCampiol.UI.Web.csproj" />
   </ItemGroup>
 
 </Project>

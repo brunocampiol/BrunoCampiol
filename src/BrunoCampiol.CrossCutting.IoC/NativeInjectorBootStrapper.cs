@@ -1,6 +1,6 @@
-﻿using BrunoCampiol.Common.Logger;
-using BrunoCampiol.Service.Interface;
-using BrunoCampiol.Service.Service;
+﻿using BrunoCampiol.CrossCutting.Common.Logger;
+using BrunoCampiol.Domain.Interface;
+using BrunoCampiol.Domain.Service;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BrunoCampiol.CrossCutting.IoC

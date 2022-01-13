@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace BrunoCampiol.Website.Configurations
+namespace BrunoCampiol.UI.Web.Configurations
 {
     public static class DependencyInjectionConfig
     {

@@ -1,4 +1,4 @@
-﻿namespace BrunoCampiol.Common.Models
+﻿namespace BrunoCampiol.CrossCutting.Common.Models
 {
     public class IPServiceAPIProvider
     {

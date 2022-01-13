@@ -1,7 +1,7 @@
-﻿using BrunoCampiol.Common.Models;
-using BrunoCampiol.Repository.Models;
-using BrunoCampiol.Service.Interface;
-using BrunoCampiol.Service.Service;
+﻿using BrunoCampiol.CrossCutting.Common.Models;
+using BrunoCampiol.Infra.Data.Models;
+using BrunoCampiol.Domain.Interface;
+using BrunoCampiol.Domain.Service;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System.Net;

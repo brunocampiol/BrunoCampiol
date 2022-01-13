@@ -1,4 +1,4 @@
-﻿using BrunoCampiol.Common.Common;
+﻿using BrunoCampiol.CrossCutting.Common.Common;
 using System;
 using Xunit;
 

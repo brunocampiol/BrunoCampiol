@@ -1,4 +1,4 @@
-﻿using BrunoCampiol.Common.Models;
+﻿using BrunoCampiol.CrossCutting.Common.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Options;
@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Text.RegularExpressions;
 
-namespace BrunoCampiol.Website.Pages
+namespace BrunoCampiol.UI.Web.Pages
 {
     public class SettingsModel : PageModel
     {

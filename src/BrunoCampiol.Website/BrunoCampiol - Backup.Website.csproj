@@ -7,9 +7,9 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BrunoCampiol.Common\BrunoCampiol.Common.csproj" />
+    <ProjectReference Include="..\BrunoCampiol.CrossCutting.Common\BrunoCampiol.CrossCutting.Common.csproj" />
     <ProjectReference Include="..\BrunoCampiol.CrossCutting.IoC\BrunoCampiol.CrossCutting.IoC.csproj" />
-    <ProjectReference Include="..\BrunoCampiol.Repository\BrunoCampiol.Repository.csproj" />
+    <ProjectReference Include="..\BrunoCampiol.Infra.Data\BrunoCampiol.Infra.Data.csproj" />
     <ProjectReference Include="..\BrunoCampiol.Service\BrunoCampiol.Service.csproj" />
   </ItemGroup>
   <ItemGroup>

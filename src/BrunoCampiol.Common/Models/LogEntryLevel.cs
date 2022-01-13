@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BrunoCampiol.Common.Models
+namespace BrunoCampiol.CrossCutting.Common.Models
 {
     public enum LogEntryLevel
     {

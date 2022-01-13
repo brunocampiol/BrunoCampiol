@@ -1,9 +1,9 @@
-﻿using BrunoCampiol.Common.Models;
+﻿using BrunoCampiol.CrossCutting.Common.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace BrunoCampiol.Website.Configurations
+namespace BrunoCampiol.UI.Web.Configurations
 {
     public static class OptionsConfig
     {

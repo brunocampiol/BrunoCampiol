@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using UAParser;
 
-namespace BrunoCampiol.Common.Common
+namespace BrunoCampiol.CrossCutting.Common.Common
 {
     /// <summary>
     /// Purpose is to have common static code that will be shared across project

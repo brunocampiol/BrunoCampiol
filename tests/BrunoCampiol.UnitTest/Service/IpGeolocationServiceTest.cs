@@ -1,7 +1,7 @@
-﻿using BrunoCampiol.Common.Common;
-using BrunoCampiol.Common.Models;
-using BrunoCampiol.Repository.Models;
-using BrunoCampiol.Service.Service;
+﻿using BrunoCampiol.CrossCutting.Common.Common;
+using BrunoCampiol.CrossCutting.Common.Models;
+using BrunoCampiol.Infra.Data.Models;
+using BrunoCampiol.Domain.Service;
 using Microsoft.Extensions.Options;
 using Moq;
 using Moq.Protected;

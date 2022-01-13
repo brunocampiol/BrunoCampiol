@@ -1,10 +1,10 @@
-﻿using BrunoCampiol.Common.Common;
+﻿using BrunoCampiol.CrossCutting.Common.Common;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BrunoCampiol.Common.Logger
+namespace BrunoCampiol.CrossCutting.Common.Logger
 {
     public class Logger : ILogger
     {

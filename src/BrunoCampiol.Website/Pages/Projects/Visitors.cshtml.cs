@@ -1,8 +1,8 @@
-﻿using BrunoCampiol.Common.Common;
-using BrunoCampiol.Common.Models;
-using BrunoCampiol.Repository.Context;
-using BrunoCampiol.Repository.Generic;
-using BrunoCampiol.Repository.Models;
+﻿using BrunoCampiol.CrossCutting.Common.Common;
+using BrunoCampiol.CrossCutting.Common.Models;
+using BrunoCampiol.Infra.Data.Context;
+using BrunoCampiol.Infra.Data.Generic;
+using BrunoCampiol.Infra.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 
-namespace BrunoCampiol.Website.Pages.Projects
+namespace BrunoCampiol.UI.Web.Pages.Projects
 {
     public class VisitorsModel : PageModel
     {

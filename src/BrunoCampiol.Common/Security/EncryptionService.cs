@@ -2,7 +2,7 @@
 using System.IO;
 using System.Security.Cryptography;
 
-namespace BrunoCampiol.Common.Security
+namespace BrunoCampiol.CrossCutting.Common.Security
 {
     /// <summary>
     /// Concrete class for encrypt/decrypt string values using Rijndael algorithm

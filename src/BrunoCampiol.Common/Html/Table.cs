@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BrunoCampiol.Common.Html
+namespace BrunoCampiol.CrossCutting.Common.Html
 {
     public class Table
     {

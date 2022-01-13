@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace BrunoCampiol.Website.Pages.Identity
+namespace BrunoCampiol.UI.Web.Pages.Identity
 {
     public class SignOutModel : PageModel
     {

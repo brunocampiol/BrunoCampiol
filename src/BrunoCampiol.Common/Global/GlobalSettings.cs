@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BrunoCampiol.Common.Global
+namespace BrunoCampiol.CrossCutting.Common.Global
 {
     /*
         This approach ensures that only one instance is created and only when the instance is needed.

@@ -1,11 +1,11 @@
-﻿using BrunoCampiol.Repository.Context;
-using BrunoCampiol.Repository.Interfaces;
+﻿using BrunoCampiol.Infra.Data.Context;
+using BrunoCampiol.Infra.Data.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace BrunoCampiol.Repository.Generic
+namespace BrunoCampiol.Infra.Data.Generic
 {
     public class Repository<T> : IDisposable, IRepository<T> where T : class
     {

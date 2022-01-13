@@ -1,4 +1,4 @@
-using BrunoCampiol.Website.Configurations;
+using BrunoCampiol.UI.Web.Configurations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.StaticFiles;
@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace BrunoCampiol.Website
+namespace BrunoCampiol.UI.Web
 {
     public class Startup
     {

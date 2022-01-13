@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BrunoCampiol.Repository.Models
+namespace BrunoCampiol.Infra.Data.Models
 {
     [Table("VISITORS", Schema = "dbo")]
     public class VISITORS

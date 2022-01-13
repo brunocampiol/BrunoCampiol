@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BrunoCampiol.Common.Common;
-using BrunoCampiol.Common.Global;
-using BrunoCampiol.Repository.Context;
-using BrunoCampiol.Repository.Generic;
-using BrunoCampiol.Repository.Models;
-using BrunoCampiol.Service.Service;
+using BrunoCampiol.CrossCutting.Common.Common;
+using BrunoCampiol.CrossCutting.Common.Global;
+using BrunoCampiol.Infra.Data.Context;
+using BrunoCampiol.Infra.Data.Generic;
+using BrunoCampiol.Infra.Data.Models;
+using BrunoCampiol.Domain.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -15,7 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
 
-namespace BrunoCampiol.Website.Pages
+namespace BrunoCampiol.UI.Web.Pages
 {
     [Authorize]
     public class PostsModel : PageModel

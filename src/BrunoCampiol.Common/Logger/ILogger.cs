@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace BrunoCampiol.Common.Logger
+namespace BrunoCampiol.CrossCutting.Common.Logger
 {
     public interface ILogger
     {

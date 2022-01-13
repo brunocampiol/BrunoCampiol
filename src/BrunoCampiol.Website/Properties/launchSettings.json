@@ -14,7 +14,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "BrunoCampiol.Website": {
+    "BrunoCampiol.UI.Web": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

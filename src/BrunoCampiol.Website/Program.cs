@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace BrunoCampiol.Website
+namespace BrunoCampiol.UI.Web
 {
     public class Program
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BrunoCampiol.Common.Generator
+namespace BrunoCampiol.CrossCutting.Common.Generator
 {
     public class StringGenerator
     {

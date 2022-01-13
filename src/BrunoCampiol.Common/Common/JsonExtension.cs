@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BrunoCampiol.Common.Common
+namespace BrunoCampiol.CrossCutting.Common.Common
 {
     public static class JsonExtension
     {

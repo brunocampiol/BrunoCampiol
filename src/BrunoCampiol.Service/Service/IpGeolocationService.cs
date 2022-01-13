@@ -1,13 +1,13 @@
-﻿using BrunoCampiol.Common.Models;
-using BrunoCampiol.Repository.Models;
-using BrunoCampiol.Service.Interface;
+﻿using BrunoCampiol.CrossCutting.Common.Models;
+using BrunoCampiol.Infra.Data.Models;
+using BrunoCampiol.Domain.Interface;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Net;
 using System.Net.Http;
 
-namespace BrunoCampiol.Service.Service
+namespace BrunoCampiol.Domain.Service
 {
     public class IPGeolocationService : IIPGeolocationService
     {

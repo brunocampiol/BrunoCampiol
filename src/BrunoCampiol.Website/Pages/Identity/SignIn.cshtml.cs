@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace BrunoCampiol.Website.Pages.Identity
+namespace BrunoCampiol.UI.Web.Pages.Identity
 {
     public class SignInModel : PageModel
     {

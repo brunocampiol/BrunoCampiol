@@ -1,10 +1,10 @@
-﻿using BrunoCampiol.Repository.Context;
+﻿using BrunoCampiol.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace BrunoCampiol.Website.Configurations
+namespace BrunoCampiol.UI.Web.Configurations
 {
     public static class DatabaseConfig
     {

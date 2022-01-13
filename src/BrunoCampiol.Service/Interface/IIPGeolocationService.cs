@@ -1,6 +1,6 @@
-﻿using BrunoCampiol.Repository.Models;
+﻿using BrunoCampiol.Infra.Data.Models;
 
-namespace BrunoCampiol.Service.Interface
+namespace BrunoCampiol.Domain.Interface
 {
     public interface IIPGeolocationService
     {

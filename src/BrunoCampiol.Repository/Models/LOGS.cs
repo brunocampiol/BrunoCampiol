@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace BrunoCampiol.Repository.Models
+namespace BrunoCampiol.Infra.Data.Models
 {
     [Table("LOGS", Schema = "dbo")]
     public class LOGS

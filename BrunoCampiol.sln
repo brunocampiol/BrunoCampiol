@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrunoCampiol.Common", "src\BrunoCampiol.Common\BrunoCampiol.Common.csproj", "{86CB6632-D11D-4139-9930-EC58B4932573}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrunoCampiol.CrossCutting.Common", "src\BrunoCampiol.Common\BrunoCampiol.CrossCutting.Common.csproj", "{86CB6632-D11D-4139-9930-EC58B4932573}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BrunoCampiol.Database", "src\BrunoCampiol.Database\BrunoCampiol.Database.sqlproj", "{529DB83E-9228-4D84-A9E7-7664FFE2F189}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrunoCampiol.Website", "src\BrunoCampiol.Website\BrunoCampiol.Website.csproj", "{2AF35C22-AE59-4B14-890F-6713C6C626CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrunoCampiol.UI.Web", "src\BrunoCampiol.Website\BrunoCampiol.UI.Web.csproj", "{2AF35C22-AE59-4B14-890F-6713C6C626CE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrunoCampiol.Repository", "src\BrunoCampiol.Repository\BrunoCampiol.Repository.csproj", "{64358D19-1DF2-421A-878F-42F91D2FFC69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrunoCampiol.Infra.Data", "src\BrunoCampiol.Repository\BrunoCampiol.Infra.Data.csproj", "{64358D19-1DF2-421A-878F-42F91D2FFC69}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrunoCampiol.Unit.Test", "tests\BrunoCampiol.UnitTest\BrunoCampiol.Unit.Test.csproj", "{A16A0263-ECE4-4A0D-98EC-D534E43CDC50}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrunoCampiol.Service", "src\BrunoCampiol.Service\BrunoCampiol.Service.csproj", "{41B7546D-FA1B-4824-B406-B78C509E7EA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrunoCampiol.Domain", "src\BrunoCampiol.Service\BrunoCampiol.Domain.csproj", "{41B7546D-FA1B-4824-B406-B78C509E7EA7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrunoCampiol.Integration.Test", "tests\BrunoCampiol.IntegrationTest\BrunoCampiol.Integration.Test.csproj", "{6B395CDD-B27A-4009-9E2D-F3082353FFED}"
 EndProject

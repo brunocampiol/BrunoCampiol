@@ -1,4 +1,4 @@
-﻿namespace BrunoCampiol.Common.Security
+﻿namespace BrunoCampiol.CrossCutting.Common.Security
 {
     /// <summary>
     /// Provides a service for encrypt / decrypt string values

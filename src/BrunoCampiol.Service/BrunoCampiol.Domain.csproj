@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -9,8 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BrunoCampiol.Common\BrunoCampiol.Common.csproj" />
-    <ProjectReference Include="..\BrunoCampiol.Repository\BrunoCampiol.Repository.csproj" />
+    <ProjectReference Include="..\BrunoCampiol.Common\BrunoCampiol.CrossCutting.Common.csproj" />
+    <ProjectReference Include="..\BrunoCampiol.Repository\BrunoCampiol.Infra.Data.csproj" />
   </ItemGroup>
 
 </Project>

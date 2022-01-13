@@ -1,4 +1,4 @@
-﻿using BrunoCampiol.Common.Security;
+﻿using BrunoCampiol.CrossCutting.Common.Security;
 using System;
 using Xunit;
 

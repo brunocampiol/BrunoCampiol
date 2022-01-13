@@ -1,7 +1,7 @@
-﻿using BrunoCampiol.Repository.Models;
+﻿using BrunoCampiol.Infra.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace BrunoCampiol.Repository.Context
+namespace BrunoCampiol.Infra.Data.Context
 {
     public class DatabaseContext : DbContext
     {

@@ -1,4 +1,4 @@
-﻿namespace BrunoCampiol.Common.Security
+﻿namespace BrunoCampiol.CrossCutting.Common.Security
 {
     internal sealed class EncryptionSettings
     {
