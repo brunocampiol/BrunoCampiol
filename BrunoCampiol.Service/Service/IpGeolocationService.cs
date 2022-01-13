@@ -30,6 +30,7 @@ namespace BrunoCampiol.Service.Service
         }
 
         // TODO: change to async
+        // TODO: change to IPaddress object instead
         public VISITORS GetVisitorInformation(string ipAddress)
         {
             if (string.IsNullOrWhiteSpace(ipAddress)) throw new ArgumentException("Cannot be null, empty or white-space", nameof(ipAddress));
@@ -45,17 +46,19 @@ namespace BrunoCampiol.Service.Service
 
             if (httpResponse.StatusCode != HttpStatusCode.OK) return null;
 
-            JObject visitorJsonObject = JObject.Parse(httpResponse.Content.ReadAsStringAsync().Result);
+            JObject jobject = JObject.Parse(httpResponse.Content.ReadAsStringAsync().Result);
 
             // TODO: check for invalid responses here
+            // TODO: change to automapper or similar
 
             VISITORS visitor = new VISITORS();
-            visitor.CITY = (string)visitorJsonObject["city"];
-            visitor.COUNTRY = (string)visitorJsonObject["countryCode"];
-            visitor.IP = (string)visitorJsonObject["query"];
-            visitor.ISP = (string)visitorJsonObject["isp"];
-            visitor.REGION = (string)visitorJsonObject["regionName"];
+            visitor.CITY = jobject.GetValue("city", StringComparison.OrdinalIgnoreCase)?.Value<string>();
+            visitor.COUNTRY = jobject.GetValue("country", StringComparison.OrdinalIgnoreCase)?.Value<string>();
+            visitor.IP = jobject.GetValue("ip", StringComparison.OrdinalIgnoreCase)?.Value<string>();
+            visitor.ISP = jobject.GetValue("isp", StringComparison.OrdinalIgnoreCase)?.Value<string>();
+            visitor.REGION = jobject.GetValue("region", StringComparison.OrdinalIgnoreCase)?.Value<string>();
             visitor.CREATED_ON_UTC = DateTime.UtcNow;
+
             return visitor;
         }
     }

@@ -26,12 +26,12 @@ namespace BrunoCampiol.IntegrationTest.Service
         }
 
         [Fact]
-        public void WhenValidIP_ExpectValidVisitor()
+        public void WhenGoogleDns_ExpectValidVisitor()
         {
             // Assemble
             var httpClientFactory = _serviceProvider.GetRequiredService<IHttpClientFactory>();
             IIPGeolocationService service = new IPGeolocationService(_configuration, httpClientFactory);
-            IPAddress address = GetRandomIP();
+            IPAddress address = IPAddress.Parse("8.8.8.8"); // Google dns address
 
             // Act
             VISITORS visitor = service.GetVisitorInformation(address.ToString());
@@ -44,15 +44,6 @@ namespace BrunoCampiol.IntegrationTest.Service
             Assert.NotNull(visitor.IP);
             Assert.NotNull(visitor.ISP);
             Assert.NotNull(visitor.REGION);
-        }
-
-        private IPAddress GetRandomIP()
-        {
-            var data = new byte[4];
-            new Random().NextBytes(data);
-            IPAddress ip = new IPAddress(data);
-
-            return ip;
         }
     }
 }
