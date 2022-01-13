@@ -5,6 +5,7 @@ using BrunoCampiol.Domain.Interfaces;
 using BrunoCampiol.Infra.Data.Context;
 using BrunoCampiol.Infra.Data.Generic;
 using BrunoCampiol.Infra.Data.Models;
+using BrunoCampiol.Infra.Data.Repository;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.Linq;
@@ -40,6 +41,7 @@ namespace BrunoCampiol.UI.Web.Pages
             SaveVisitor(userAgent, ipAddress, browserName, osName, headerString);
         }
 
+        // TODO move this logic to application
         private void SaveVisitor(string userAgent, string ipAddress, string browserName, string osName, string headers)
         {
             try
@@ -52,7 +54,7 @@ namespace BrunoCampiol.UI.Web.Pages
 
                 Repository<VISITORS> repository = new Repository<VISITORS>(_databaseContext);
 
-                isIpStored = repository.Get(v => v.IP == ipAddress).Any();
+                isIpStored = repository.GetNoTrack(v => v.IP == ipAddress).Any();
 
                 // If not stored then query IP information
                 if (!isIpStored)

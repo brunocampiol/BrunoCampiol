@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace BrunoCampiol.Infra.Data.Interfaces
 {
@@ -14,13 +15,15 @@ namespace BrunoCampiol.Infra.Data.Interfaces
 
         IQueryable<T> GetNoTrack(Expression<Func<T, bool>> predicate);
 
-        void Add(T entity);
+        void Add(T entity);         
 
         void Remove(T entity);
 
         void Edit(T entity);
 
         void Save();
+
+        Task SaveAsync();
 
         void Dispose();
     }

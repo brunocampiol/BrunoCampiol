@@ -4,8 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
-namespace BrunoCampiol.Infra.Data.Generic
+namespace BrunoCampiol.Infra.Data.Repository
 {
     public class Repository<T> : IDisposable, IRepository<T> where T : class
     {
@@ -58,6 +59,11 @@ namespace BrunoCampiol.Infra.Data.Generic
         public void Save()
         {
             _dbContext.SaveChanges();
+        }
+
+        public async Task SaveAsync()
+        {
+            await _dbContext.SaveChangesAsync();
         }
 
         public void Dispose()
