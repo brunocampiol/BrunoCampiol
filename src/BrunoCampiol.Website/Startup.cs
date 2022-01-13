@@ -1,6 +1,3 @@
-using BrunoCampiol.Common.Logger;
-using BrunoCampiol.Service.Interface;
-using BrunoCampiol.Service.Service;
 using BrunoCampiol.Website.Configurations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -38,8 +35,8 @@ namespace BrunoCampiol.Website
             // IOptions configuration
             services.AddOptionsConfiguration(_configuration);
 
-            // Register services
-            RegisterServices(services);
+            // .NET Native DI Abstraction
+            services.AddDependencyInjectionConfiguration();
 
             //// http://codereform.com/blog/post/asp-net-core-2-1-authentication-with-social-logins/
             //services.AddAuthentication(options =>
@@ -106,14 +103,6 @@ namespace BrunoCampiol.Website
             provider.Mappings[".exe"] = "application/octect-stream";
             provider.Mappings[".vsix"] = "application/vsix";
             return new StaticFileOptions { ContentTypeProvider = provider };
-        }
-
-        private void RegisterServices(IServiceCollection services)
-        {
-            services.AddHttpClient();
-
-            services.AddScoped<ILogger, Logger>();
-            services.AddScoped<IIPGeolocationService, IPGeolocationService>();
         }
     }
 }

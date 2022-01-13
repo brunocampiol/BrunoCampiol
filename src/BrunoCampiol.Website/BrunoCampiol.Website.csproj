@@ -8,6 +8,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BrunoCampiol.Common\BrunoCampiol.Common.csproj" />
+    <ProjectReference Include="..\BrunoCampiol.CrossCutting.IoC\BrunoCampiol.CrossCutting.IoC.csproj" />
     <ProjectReference Include="..\BrunoCampiol.Repository\BrunoCampiol.Repository.csproj" />
     <ProjectReference Include="..\BrunoCampiol.Service\BrunoCampiol.Service.csproj" />
   </ItemGroup>
