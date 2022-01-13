@@ -16,8 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BrunoCampiol.Common\BrunoCampiol.Common.csproj" />
-    <ProjectReference Include="..\BrunoCampiol.Service\BrunoCampiol.Service.csproj" />
+    <ProjectReference Include="..\..\src\BrunoCampiol.Website\BrunoCampiol.Website.csproj" />
   </ItemGroup>
 
 </Project>

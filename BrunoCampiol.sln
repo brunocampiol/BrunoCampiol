@@ -1,23 +1,25 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2026
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrunoCampiol.Common", "BrunoCampiol.Common\BrunoCampiol.Common.csproj", "{86CB6632-D11D-4139-9930-EC58B4932573}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrunoCampiol.Common", "src\BrunoCampiol.Common\BrunoCampiol.Common.csproj", "{86CB6632-D11D-4139-9930-EC58B4932573}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BrunoCampiol.Database", "BrunoCampiol.Database\BrunoCampiol.Database.sqlproj", "{529DB83E-9228-4D84-A9E7-7664FFE2F189}"
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BrunoCampiol.Database", "src\BrunoCampiol.Database\BrunoCampiol.Database.sqlproj", "{529DB83E-9228-4D84-A9E7-7664FFE2F189}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrunoCampiol.Website", "BrunoCampiol.Website\BrunoCampiol.Website.csproj", "{2AF35C22-AE59-4B14-890F-6713C6C626CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrunoCampiol.Website", "src\BrunoCampiol.Website\BrunoCampiol.Website.csproj", "{2AF35C22-AE59-4B14-890F-6713C6C626CE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrunoCampiol.Repository", "BrunoCampiol.Repository\BrunoCampiol.Repository.csproj", "{64358D19-1DF2-421A-878F-42F91D2FFC69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrunoCampiol.Repository", "src\BrunoCampiol.Repository\BrunoCampiol.Repository.csproj", "{64358D19-1DF2-421A-878F-42F91D2FFC69}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrunoCampiol.UnitTest", "BrunoCampiol.UnitTest\BrunoCampiol.UnitTest.csproj", "{A16A0263-ECE4-4A0D-98EC-D534E43CDC50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrunoCampiol.UnitTest", "tests\BrunoCampiol.UnitTest\BrunoCampiol.UnitTest.csproj", "{A16A0263-ECE4-4A0D-98EC-D534E43CDC50}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrunoCampiol.Service", "BrunoCampiol.Service\BrunoCampiol.Service.csproj", "{41B7546D-FA1B-4824-B406-B78C509E7EA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrunoCampiol.Service", "src\BrunoCampiol.Service\BrunoCampiol.Service.csproj", "{41B7546D-FA1B-4824-B406-B78C509E7EA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrunoCampiol.IntegrationTest", "BrunoCampiol.IntegrationTest\BrunoCampiol.IntegrationTest.csproj", "{6B395CDD-B27A-4009-9E2D-F3082353FFED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrunoCampiol.IntegrationTest", "tests\BrunoCampiol.IntegrationTest\BrunoCampiol.IntegrationTest.csproj", "{6B395CDD-B27A-4009-9E2D-F3082353FFED}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{034EFAEF-B7B7-4466-B42D-4EBC42A01639}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{034EFAEF-B7B7-4466-B42D-4EBC42A01639}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4AE9FE5D-C712-4D7E-8D2D-763E84ED93EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,7 +62,12 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{86CB6632-D11D-4139-9930-EC58B4932573} = {4AE9FE5D-C712-4D7E-8D2D-763E84ED93EF}
+		{529DB83E-9228-4D84-A9E7-7664FFE2F189} = {4AE9FE5D-C712-4D7E-8D2D-763E84ED93EF}
+		{2AF35C22-AE59-4B14-890F-6713C6C626CE} = {4AE9FE5D-C712-4D7E-8D2D-763E84ED93EF}
+		{64358D19-1DF2-421A-878F-42F91D2FFC69} = {4AE9FE5D-C712-4D7E-8D2D-763E84ED93EF}
 		{A16A0263-ECE4-4A0D-98EC-D534E43CDC50} = {034EFAEF-B7B7-4466-B42D-4EBC42A01639}
+		{41B7546D-FA1B-4824-B406-B78C509E7EA7} = {4AE9FE5D-C712-4D7E-8D2D-763E84ED93EF}
 		{6B395CDD-B27A-4009-9E2D-F3082353FFED} = {034EFAEF-B7B7-4466-B42D-4EBC42A01639}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
