@@ -1,10 +1,10 @@
 ﻿using BrunoCampiol.CrossCutting.Common.Common;
 using BrunoCampiol.CrossCutting.Common.Logger;
 using BrunoCampiol.CrossCutting.Common.Models;
+using BrunoCampiol.Domain.Interfaces;
 using BrunoCampiol.Infra.Data.Context;
 using BrunoCampiol.Infra.Data.Generic;
 using BrunoCampiol.Infra.Data.Models;
-using BrunoCampiol.Domain.Interface;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.Linq;
@@ -94,6 +94,7 @@ namespace BrunoCampiol.UI.Web.Pages
             }
             catch (Exception e)
             {
+                // TODO add global exception handler
                 _logger.LogException(e);
             }
         }
