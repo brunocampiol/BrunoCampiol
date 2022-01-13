@@ -4,12 +4,11 @@ using BrunoCampiol.Service.Interface;
 using BrunoCampiol.Service.Service;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using System;
 using System.Net;
 using System.Net.Http;
 using Xunit;
 
-namespace BrunoCampiol.IntegrationTest.Service
+namespace BrunoCampiol.Integration.Test.Service
 {
     public class IpGeolocationServiceTest
     {

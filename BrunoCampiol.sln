@@ -11,11 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrunoCampiol.Website", "src
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrunoCampiol.Repository", "src\BrunoCampiol.Repository\BrunoCampiol.Repository.csproj", "{64358D19-1DF2-421A-878F-42F91D2FFC69}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrunoCampiol.UnitTest", "tests\BrunoCampiol.UnitTest\BrunoCampiol.UnitTest.csproj", "{A16A0263-ECE4-4A0D-98EC-D534E43CDC50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrunoCampiol.Unit.Test", "tests\BrunoCampiol.UnitTest\BrunoCampiol.Unit.Test.csproj", "{A16A0263-ECE4-4A0D-98EC-D534E43CDC50}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrunoCampiol.Service", "src\BrunoCampiol.Service\BrunoCampiol.Service.csproj", "{41B7546D-FA1B-4824-B406-B78C509E7EA7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrunoCampiol.IntegrationTest", "tests\BrunoCampiol.IntegrationTest\BrunoCampiol.IntegrationTest.csproj", "{6B395CDD-B27A-4009-9E2D-F3082353FFED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrunoCampiol.Integration.Test", "tests\BrunoCampiol.IntegrationTest\BrunoCampiol.Integration.Test.csproj", "{6B395CDD-B27A-4009-9E2D-F3082353FFED}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{034EFAEF-B7B7-4466-B42D-4EBC42A01639}"
 EndProject

@@ -2,7 +2,7 @@
 using System;
 using Xunit;
 
-namespace BrunoCampiol.UnitTest.Common
+namespace BrunoCampiol.Unit.Test.Common
 {
     public class SecurityServiceTest
     {

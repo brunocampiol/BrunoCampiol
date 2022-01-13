@@ -12,7 +12,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace BrunoCampiol.UnitTest.Service
+namespace BrunoCampiol.Unit.Test.Service
 {
     public class IpGeolocationServiceTest
     {
