@@ -47,7 +47,8 @@ namespace BrunoCampiol.Domain.Services
             if (visitor == null) throw new ArgumentNullException(nameof(visitor));
 
             // Checks if localhost / already exists
-            if (visitor.IP == "localhost" || visitor.IP == "::1") return;
+            // if (visitor.IP == "localhost" || visitor.IP == "::1") return;
+            if (visitor.IP == "localhost" || visitor.IP == "::1") visitor.IP = GetRandomIpAddress();
             if (_visitorRepository.Exists(visitor.IP)) return;
 
             visitor = PopulateVisitorInformation(visitor);
@@ -60,7 +61,8 @@ namespace BrunoCampiol.Domain.Services
             if (visitor == null) throw new ArgumentNullException(nameof(visitor));
 
             // Checks if localhost / already exists
-            if (visitor.IP == "localhost" || visitor.IP == "::1") return;
+            // if (visitor.IP == "localhost" || visitor.IP == "::1") return;
+            if (visitor.IP == "localhost" || visitor.IP == "::1") visitor.IP = GetRandomIpAddress();
             if (_visitorRepository.Exists(visitor.IP)) return;
 
             visitor = await PopulateVisitorInformationAsync(visitor);
@@ -87,7 +89,7 @@ namespace BrunoCampiol.Domain.Services
             JObject jobject = JObject.Parse(httpResponse.Content.ReadAsStringAsync().Result);
 
             visitor.CITY = jobject.GetValue("city", StringComparison.OrdinalIgnoreCase)?.Value<string>();
-            visitor.COUNTRY = jobject.GetValue("country", StringComparison.OrdinalIgnoreCase)?.Value<string>();
+            visitor.COUNTRY = jobject.GetValue("countryCode", StringComparison.OrdinalIgnoreCase)?.Value<string>();
             //visitor.IP = jobject.GetValue("ip", StringComparison.OrdinalIgnoreCase)?.Value<string>();
             visitor.ISP = jobject.GetValue("isp", StringComparison.OrdinalIgnoreCase)?.Value<string>();
             visitor.REGION = jobject.GetValue("region", StringComparison.OrdinalIgnoreCase)?.Value<string>();
@@ -110,13 +112,21 @@ namespace BrunoCampiol.Domain.Services
             JObject jobject = JObject.Parse(await httpResponse.Content.ReadAsStringAsync());
 
             visitor.CITY = jobject.GetValue("city", StringComparison.OrdinalIgnoreCase)?.Value<string>();
-            visitor.COUNTRY = jobject.GetValue("country", StringComparison.OrdinalIgnoreCase)?.Value<string>();
+            visitor.COUNTRY = jobject.GetValue("countryCode", StringComparison.OrdinalIgnoreCase)?.Value<string>();
             //visitor.IP = jobject.GetValue("ip", StringComparison.OrdinalIgnoreCase)?.Value<string>();
             visitor.ISP = jobject.GetValue("isp", StringComparison.OrdinalIgnoreCase)?.Value<string>();
             visitor.REGION = jobject.GetValue("region", StringComparison.OrdinalIgnoreCase)?.Value<string>();
             //visitor.CREATED_ON_UTC = DateTime.UtcNow;
 
             return visitor;
+        }
+
+        private static string GetRandomIpAddress()
+        {
+            var data = new byte[4];
+            new Random().NextBytes(data);
+            IPAddress ip = new IPAddress(data);
+            return ip.ToString();
         }
 
         // TODO: change to IPaddress object instead

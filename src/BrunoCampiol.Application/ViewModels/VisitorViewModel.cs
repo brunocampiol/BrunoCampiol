@@ -11,6 +11,6 @@
         public string ClientUserAgent { get; set; }
         public string ClientBrowser { get; set; }
         public string ClientOS { get; set; }
-        public DateTime CreatedUtc { get; set; }
+        public DateTime CreatedUtc { get; set; } = DateTime.UtcNow;
     }
 }
