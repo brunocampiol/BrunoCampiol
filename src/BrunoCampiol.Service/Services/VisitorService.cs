@@ -5,6 +5,7 @@ using BrunoCampiol.Infra.Data.Models;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -34,6 +35,11 @@ namespace BrunoCampiol.Domain.Services
             _baseUrl = settingsProvider.Value.Host;
             _httpClientFactory = httpClientFactory;
             _visitorRepository = visitorRepository;
+        }
+
+        public ICollection<VISITORS> GetPagedVisitors(int page, int pageSize)
+        {
+            return _visitorRepository.GetPagedVisitors(page, pageSize);
         }
 
         public void HandleVisitor(VISITORS visitor)

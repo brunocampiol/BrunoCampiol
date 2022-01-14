@@ -1,4 +1,5 @@
-﻿using BrunoCampiol.Application.Services;
+﻿using BrunoCampiol.Application.Interfaces;
+using BrunoCampiol.Application.Services;
 using BrunoCampiol.CrossCutting.Common.Logger;
 using BrunoCampiol.Domain.Interfaces;
 using BrunoCampiol.Domain.Services;
@@ -17,7 +18,7 @@ namespace BrunoCampiol.CrossCutting.IoC
             services.AddScoped<IVisitorRepository, VisitorRepository>();
 
             services.AddScoped<IVisitorService, VisitorService>();
-            services.AddScoped<VisitorAppService, VisitorAppService>();
+            services.AddScoped<IVisitorAppService, VisitorAppService>();
         }
     }
 }

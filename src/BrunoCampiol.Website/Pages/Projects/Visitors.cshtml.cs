@@ -1,7 +1,6 @@
-﻿using BrunoCampiol.CrossCutting.Common.Common;
-using BrunoCampiol.CrossCutting.Common.Models;
-using BrunoCampiol.Infra.Data.Context;
-using BrunoCampiol.Infra.Data.Models;
+﻿using BrunoCampiol.Application.Interfaces;
+using BrunoCampiol.Application.ViewModels;
+using BrunoCampiol.CrossCutting.Common.Common;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
@@ -17,24 +16,22 @@ namespace BrunoCampiol.UI.Web.Pages.Projects
 
         public string pieDataScript { get; private set; }
 
+        private readonly IVisitorAppService _appService;
 
-        private readonly DatabaseContext _databaseContext;
-
-        public VisitorsModel(DatabaseContext databaseContext)
+        public VisitorsModel(IVisitorAppService appService)
         {
-            _databaseContext = databaseContext;
+            _appService = appService;
         }
 
         public void OnGet()
         {
-            List<VISITORS> visitorList = GetVisitorList(1, 50);
-
+            var visitorList = GetVisitorList(1, 50);
             visitorListString = GetVisitorListAsHtml(visitorList);
         }
 
         public IActionResult OnGetRow(int id)
         {
-            List<VISITORS> visitorList = GetVisitorList(id, 50);
+            var visitorList = GetVisitorList(id, 50);
 
             string rows = String.Empty;
 
@@ -47,29 +44,30 @@ namespace BrunoCampiol.UI.Web.Pages.Projects
             return new JsonResult(rows);
         }
 
-        private string GetVisitorListAsHtml(List<VISITORS> visitorList)
+        private string GetVisitorListAsHtml(List<VisitorViewModel> visitorList)
         {
+            // TODO use string builder
             string rows = String.Empty;
 
-            foreach (VISITORS visitor in visitorList)
+            foreach (VisitorViewModel visitor in visitorList)
             {
                 rows += "<div class=\"row visitor-text\">";
                 rows += "<div class=\"col-3 ellipsis text-center responsive-table-text-visitors\">";
-                rows += visitor.IP;
+                rows += visitor.Ip;
                 rows += "</div>";
                 rows += "<div class=\"col-1 ellipsis text-center responsive-table-text-visitors\">";
-                rows += " <span class=\"flag-icon flag-icon-" + visitor.COUNTRY.ToLower() + "\"></span>";
+                rows += " <span class=\"flag-icon flag-icon-" + visitor.Country.ToLower() + "\"></span>";
                 rows += "</div>";
                 rows += "<div class=\"col-2 ellipsis  text-center responsive-table-text-visitors\">";
-                rows += visitor.CREATED_ON_UTC.ToTimeAgo();
+                rows += visitor.CreatedUtc.ToTimeAgo();
                 rows += "</div>";
                 rows += "<div class=\"col-1 ellipsis text-center responsive-table-text-visitors\">";
-                rows += GetOSIcon(visitor.CLIENT_OS);
+                rows += GetOSIcon(visitor.ClientOS);
                 rows += "  ";
-                rows += GetBrowserIcon(visitor.CLIENT_BROWSER);
+                rows += GetBrowserIcon(visitor.ClientBrowser);
                 rows += "</div>";
                 rows += "<div class=\"col-5 ellipsis responsive-table-text-visitors\">";
-                rows += visitor.REGION + " - " + visitor.CITY;
+                rows += visitor.Region + " - " + visitor.City;
                 rows += "</div>";
                 rows += "</div>";
             }
@@ -77,87 +75,87 @@ namespace BrunoCampiol.UI.Web.Pages.Projects
             return rows;
         }
 
-        private List<VISITORS> GetVisitorList(int page, int pageSize)
+        private List<VisitorViewModel> GetVisitorList(int page, int pageSize)
         {
-            var htmlString = String.Empty;
+            //var htmlString = String.Empty;
+            //Repository<VISITORS> repository = new Repository<VISITORS>(_appService);
+            //IQueryable<VISITORS> visitorListQuery = repository.GetAllNoTrack().OrderByDescending(visitor => visitor.CREATED_ON_UTC).Skip((page - 1) * pageSize).Take(pageSize);
+            //List<VISITORS> listVisitors = visitorListQuery.ToList();
+            //return listVisitors;
 
-            Repository<VISITORS> repository = new Repository<VISITORS>(_databaseContext);
-
-            IQueryable<VISITORS> visitorListQuery = repository.GetAllNoTrack().OrderByDescending(visitor => visitor.CREATED_ON_UTC).Skip((page - 1) * pageSize).Take(pageSize);
-            List<VISITORS> listVisitors = visitorListQuery.ToList();
-
-            return listVisitors;
+            var visitors = _appService.GetPagedVisitors(page, pageSize);
+            return visitors.ToList();
         }
 
-        private Color GetRandomColor()
-        {
-            Random rnd = new Random();
+        //private Color GetRandomColor()
+        //{
+        //    Random rnd = new Random();
 
-            Color randomColor = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+        //    Color randomColor = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
 
-            return randomColor;
-        }
+        //    return randomColor;
+        //}
 
-        private string GetRandomColorScript(string colorHardness)
-        {
-            Color color = GetRandomColor();
+        //private string GetRandomColorScript(string colorHardness)
+        //{
+        //    Color color = GetRandomColor();
 
-            string scriptColor = $"'rgba({color.R.ToString()},{color.G.ToString()},{color.B.ToString()},{colorHardness})'";
+        //    string scriptColor = $"'rgba({color.R.ToString()},{color.G.ToString()},{color.B.ToString()},{colorHardness})'";
 
-            return scriptColor;
-        }
+        //    return scriptColor;
+        //}
 
-        private List<CountryChartData> GetDatabasePieData()
-        {
-            Repository<VISITORS> repository = new Repository<VISITORS>(_databaseContext);
+        //private List<CountryChartData> GetDatabasePieData()
+        //{
+        //    Repository<VISITORS> repository = new Repository<VISITORS>(_databaseContext);
 
-            IQueryable<CountryChartData> visitorListQuery = repository.GetAllNoTrack()
-                                                                .GroupBy(group => group.COUNTRY)
-                                                                .Select(item => new CountryChartData { Country = item.First().COUNTRY,
-                                                                                                        Count = item.Count() });
+        //    IQueryable<CountryChartData> visitorListQuery = repository.GetAllNoTrack()
+        //                                                        .GroupBy(group => group.COUNTRY)
+        //                                                        .Select(item => new CountryChartData { Country = item.First().COUNTRY,
+        //                                                                                                Count = item.Count() });
 
-            List<CountryChartData> countriesData = visitorListQuery.ToList();
+        //    List<CountryChartData> countriesData = visitorListQuery.ToList();
 
-            return countriesData;
-        }
+        //    return countriesData;
+        //}
 
-        private void GetPieData()
-        {
-            List<CountryChartData> countriesData = GetDatabasePieData();
+        //private void GetPieData()
+        //{
+        //    List<CountryChartData> countriesData = GetDatabasePieData();
 
-            string script = String.Empty;
+        //    string script = String.Empty;
 
-            script += "<script>";
+        //    script += "<script>";
 
-            script += " countrySum = [";
+        //    script += " countrySum = [";
 
-            for (int i = 0; i < countriesData.Count; i++)
-            {
-                if (i == countriesData.Count - 1) script += countriesData[i].Count + "]; ";
-                else script += countriesData[i].Count + ", ";
-            }
+        //    for (int i = 0; i < countriesData.Count; i++)
+        //    {
+        //        if (i == countriesData.Count - 1) script += countriesData[i].Count + "]; ";
+        //        else script += countriesData[i].Count + ", ";
+        //    }
 
-            script += " countryLabels = [";
+        //    script += " countryLabels = [";
 
-            for (int i = 0; i < countriesData.Count; i++)
-            {
-                if (i == countriesData.Count - 1) script += "'" + countriesData[i].Country + "']; ";
-                else script += "'" + countriesData[i].Country + "', ";
-            }
+        //    for (int i = 0; i < countriesData.Count; i++)
+        //    {
+        //        if (i == countriesData.Count - 1) script += "'" + countriesData[i].Country + "']; ";
+        //        else script += "'" + countriesData[i].Country + "', ";
+        //    }
 
-            script += " countryColors = [";
+        //    script += " countryColors = [";
 
-            for (int i = 0; i < countriesData.Count; i++)
-            {
-                if (i == countriesData.Count - 1) script += GetRandomColorScript("1") + "]; ";
-                else script += GetRandomColorScript("1") + ", ";
-            }
+        //    for (int i = 0; i < countriesData.Count; i++)
+        //    {
+        //        if (i == countriesData.Count - 1) script += GetRandomColorScript("1") + "]; ";
+        //        else script += GetRandomColorScript("1") + ", ";
+        //    }
 
 
-            script += "</script>";
+        //    script += "</script>";
 
-            pieDataScript = script;
-        }
+        //    pieDataScript = script;
+        //}
 
         private string GetOSIcon(string clientOS)
         {

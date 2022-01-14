@@ -8,7 +8,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BrunoCampiol.CrossCutting.IoC\BrunoCampiol.CrossCutting.IoC.csproj" />
-    <ProjectReference Include="..\BrunoCampiol.Repository\BrunoCampiol.Infra.Data.csproj" />
     <ProjectReference Include="..\BrunoCampiol.Service\BrunoCampiol.Domain.csproj" />
   </ItemGroup>
   <ItemGroup>
@@ -16,6 +15,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AspNet.Security.OAuth.GitHub" Version="6.0.2" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.1" />
   </ItemGroup>

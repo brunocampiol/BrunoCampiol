@@ -1,4 +1,5 @@
 ﻿using BrunoCampiol.Application.Interfaces;
+using BrunoCampiol.Application.ViewModels;
 using BrunoCampiol.CrossCutting.Common.Common;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
@@ -17,19 +18,40 @@ namespace BrunoCampiol.UI.Web.Pages
 
         public void OnGet()
         {
-            // Ip and UserAgent shall not be queried in thread
-            string userAgent = Request.Headers["User-Agent"].ToString();
-            string ipAddress = Request.HttpContext.Connection.RemoteIpAddress.ToString();
-            string browserName = StaticLibrary.GetBrowserName(userAgent);
-            string osName = StaticLibrary.GetOperationalSystemName(userAgent);
+            //// Ip and UserAgent shall not be queried in thread
+            //string userAgent = Request.Headers["User-Agent"].ToString();
+            //string ipAddress = Request.HttpContext.Connection.RemoteIpAddress.ToString();
+            //string browserName = StaticLibrary.GetBrowserName(userAgent);
+            //string osName = StaticLibrary.GetOperationalSystemName(userAgent);
 
-            var headers = Request.Headers.Select(x => x.Key + ":" + x.Value);
-            string headerString = String.Join(Environment.NewLine, headers.Select(x => x.ToString()));
-
-            // TODO fix get real info from request
-            _appService.HandleVisitor(new Application.ViewModels.VisitorViewModel());
+            //var headers = Request.Headers.Select(x => x.Key + ":" + x.Value);
+            //string headerString = String.Join(Environment.NewLine, headers.Select(x => x.ToString()));
 
             //SaveVisitor(userAgent, ipAddress, browserName, osName, headerString);
+
+            var visitor = GetVisitorViewModel();
+            _appService.HandleVisitor(visitor);
+        }
+
+        private VisitorViewModel GetVisitorViewModel()
+        {
+            var userAgent = Request.Headers["User-Agent"].ToString();
+            var ipAddress = Request.HttpContext.Connection.RemoteIpAddress.ToString();
+            var browserName = StaticLibrary.GetBrowserName(userAgent);
+            var osName = StaticLibrary.GetOperationalSystemName(userAgent);
+            var headers = Request.Headers.Select(x => x.Key + ":" + x.Value);
+            var headerString = string.Join(Environment.NewLine, headers.Select(x => x.ToString()));
+
+            var visitor = new VisitorViewModel()
+            {
+                Ip = ipAddress,
+                ClientHeaders = headerString,
+                ClientBrowser = browserName,
+                ClientOS = osName,
+                ClientUserAgent = userAgent,
+            };
+
+            return visitor;
         }
 
         //public void SaveVisitor(string userAgent, string ipAddress, string browserName, string osName, string headers)

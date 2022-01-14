@@ -38,6 +38,9 @@ namespace BrunoCampiol.UI.Web
             // .NET Native DI Abstraction
             services.AddDependencyInjectionConfiguration();
 
+            // AutoMapper Settings
+            services.AddAutoMapperConfiguration();
+
             //// http://codereform.com/blog/post/asp-net-core-2-1-authentication-with-social-logins/
             //services.AddAuthentication(options =>
             //{
@@ -82,7 +85,6 @@ namespace BrunoCampiol.UI.Web
                 app.UseStatusCodePagesWithRedirects("/error/{0}");
                 app.UseHsts();
             }
-
 
             app.UseHttpsRedirection();
             app.UseStaticFiles(GetStaticFileConfiguration());

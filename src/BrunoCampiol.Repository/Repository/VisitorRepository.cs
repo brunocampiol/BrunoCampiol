@@ -3,6 +3,7 @@ using BrunoCampiol.Infra.Data.Interfaces;
 using BrunoCampiol.Infra.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,6 +23,32 @@ namespace BrunoCampiol.Infra.Data.Repository
         public void Dispose()
         {
             _db.Dispose();
+        }
+
+        public ICollection<VISITORS> GetPagedVisitors(int page, int pageSize)
+        {
+            if (page <= 0) throw new ArgumentOutOfRangeException(nameof(page));
+            if (pageSize <= 0) throw new ArgumentOutOfRangeException(nameof(pageSize));
+
+            IQueryable<VISITORS> visitorListQuery = _dbSet.AsNoTracking()
+                                                          .OrderByDescending(visitor => visitor.CREATED_ON_UTC)
+                                                          .Skip((page - 1) * pageSize).Take(pageSize);
+
+            var visitors = visitorListQuery.ToList();
+            return visitors;
+        }
+
+        public async Task<ICollection<VISITORS>> GetPagedVisitorsAsync(int page, int pageSize)
+        {
+            if (page <= 0) throw new ArgumentOutOfRangeException(nameof(page));
+            if (pageSize <= 0) throw new ArgumentOutOfRangeException(nameof(pageSize));
+
+            IQueryable<VISITORS> visitorListQuery = _dbSet.AsNoTracking()
+                                                          .OrderByDescending(visitor => visitor.CREATED_ON_UTC)
+                                                          .Skip((page - 1) * pageSize).Take(pageSize);
+
+            var visitors = await visitorListQuery.ToListAsync();
+            return visitors;
         }
 
         public bool Exists(string ipAddress)
