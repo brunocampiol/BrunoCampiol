@@ -1,6 +1,9 @@
-﻿using BrunoCampiol.CrossCutting.Common.Logger;
-using BrunoCampiol.Domain.Interface;
-using BrunoCampiol.Domain.Service;
+﻿using BrunoCampiol.Application.Services;
+using BrunoCampiol.CrossCutting.Common.Logger;
+using BrunoCampiol.Domain.Interfaces;
+using BrunoCampiol.Domain.Services;
+using BrunoCampiol.Infra.Data.Interfaces;
+using BrunoCampiol.Infra.Data.Repository;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BrunoCampiol.CrossCutting.IoC
@@ -9,8 +12,12 @@ namespace BrunoCampiol.CrossCutting.IoC
     {
         public static void RegisterServices(IServiceCollection services)
         {
-            services.AddScoped<ILogger, Logger>();
-            services.AddScoped<IIPGeolocationService, IPGeolocationService>();
+            services.AddSingleton<ILogger, Logger>();
+
+            services.AddScoped<IVisitorRepository, VisitorRepository>();
+
+            services.AddScoped<IVisitorService, VisitorService>();
+            services.AddScoped<VisitorAppService, VisitorAppService>();
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using BrunoCampiol.CrossCutting.Common.Common;
 using BrunoCampiol.CrossCutting.Common.Models;
 using BrunoCampiol.Infra.Data.Context;
-using BrunoCampiol.Infra.Data.Generic;
 using BrunoCampiol.Infra.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;

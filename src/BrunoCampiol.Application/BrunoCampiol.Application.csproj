@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BrunoCampiol.Application\BrunoCampiol.Application.csproj" />
     <ProjectReference Include="..\BrunoCampiol.Service\BrunoCampiol.Domain.csproj" />
   </ItemGroup>
 
