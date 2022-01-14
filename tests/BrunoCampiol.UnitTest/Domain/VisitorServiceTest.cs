@@ -1,7 +1,8 @@
 ﻿using BrunoCampiol.CrossCutting.Common.Common;
 using BrunoCampiol.CrossCutting.Common.Models;
+using BrunoCampiol.Domain.Services;
+using BrunoCampiol.Infra.Data.Interfaces;
 using BrunoCampiol.Infra.Data.Models;
-using BrunoCampiol.Domain.Service;
 using Microsoft.Extensions.Options;
 using Moq;
 using Moq.Protected;
@@ -14,24 +15,24 @@ using Xunit;
 
 namespace BrunoCampiol.Unit.Test.Service
 {
-    public class IpGeolocationServiceTest
-    {
-        // change to options create
+    public class VisitorServiceTest
+    {        
         private readonly Mock<IHttpClientFactory> _httpClientFactory;
+        private readonly Mock<IVisitorRepository> _visitorRepository;
         private readonly IOptions<IPServiceAPIProvider> _configuration;
         private static readonly string _hostUrl = "https://mock-url.campiol";
 
-        public IpGeolocationServiceTest()
+        public VisitorServiceTest()
         {
             _configuration = Options.Create(new IPServiceAPIProvider() { Host = _hostUrl });
             _httpClientFactory = new Mock<IHttpClientFactory>();
+            _visitorRepository = new Mock<IVisitorRepository>();
         }
 
         [Fact]
         public void WhenValidIP_ExpectValidVisitor()
         {
             // Assemble
-
             VISITORS expectedVisitor = new VISITORS()
             {
                 CITY = "string",
@@ -56,19 +57,13 @@ namespace BrunoCampiol.Unit.Test.Service
 
             _httpClientFactory.Setup(cf => cf.CreateClient(It.IsAny<string>())).Returns(httpClient);
 
-            var service = new IPGeolocationService(_configuration, _httpClientFactory.Object);
+            var service = new VisitorService(_configuration, _httpClientFactory.Object, _visitorRepository.Object);
 
             // Act
-            VISITORS actualVisitor = service.GetVisitorInformation("127.0.0.1");
+            service.HandleVisitor(expectedVisitor);
 
             // Assert
-            // Do not expect to be HTTP status 200 because the api can later return another result
-            Assert.NotNull(actualVisitor);
-            Assert.NotNull(actualVisitor.CITY);
-            Assert.NotNull(actualVisitor.COUNTRY);
-            Assert.NotNull(actualVisitor.IP);
-            Assert.NotNull(actualVisitor.ISP);
-            Assert.NotNull(actualVisitor.REGION);
+            // Not useful test - simply does not throws exception
         }
     }
 }

@@ -44,6 +44,8 @@ namespace BrunoCampiol.Domain.Services
 
         public void HandleVisitor(VISITORS visitor)
         {
+            if (visitor == null) throw new ArgumentNullException(nameof(visitor));
+
             // Checks if localhost / already exists
             if (visitor.IP == "localhost" || visitor.IP == "::1") return;
             if (_visitorRepository.Exists(visitor.IP)) return;
@@ -55,6 +57,8 @@ namespace BrunoCampiol.Domain.Services
 
         public async Task HandleVisitorAsync(VISITORS visitor)
         {
+            if (visitor == null) throw new ArgumentNullException(nameof(visitor));
+
             // Checks if localhost / already exists
             if (visitor.IP == "localhost" || visitor.IP == "::1") return;
             if (_visitorRepository.Exists(visitor.IP)) return;
