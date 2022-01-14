@@ -13,7 +13,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace BrunoCampiol.Unit.Test.Service
+namespace BrunoCampiol.Unit.Test.Domain
 {
     public class VisitorServiceTest
     {        
