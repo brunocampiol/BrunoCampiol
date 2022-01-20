@@ -18,8 +18,15 @@ namespace BrunoCampiol.UI.Web.Pages
 
         public void OnGet()
         {
-            var visitor = GetVisitorViewModel();
-            _appService.HandleVisitor(visitor);
+            try
+            {
+                var visitor = GetVisitorViewModel();
+                _appService.HandleVisitor(visitor);
+            }
+            catch (Exception)
+            {
+                // TODO: proper error handling
+            }
         }
 
         private VisitorViewModel GetVisitorViewModel()

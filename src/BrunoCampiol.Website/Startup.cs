@@ -29,8 +29,8 @@ namespace BrunoCampiol.UI.Web
             //});
 
             // Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
-            services.AddRazorPages()
-                    .AddRazorRuntimeCompilation(); // TODO: remove for PROD
+            services.AddRazorPages();
+                    //.AddRazorRuntimeCompilation(); // remove for PROD
 
             // Setting DBContexts
             services.AddDatabaseConfiguration(_configuration);

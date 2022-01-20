@@ -64,15 +64,8 @@ namespace BrunoCampiol.Infra.Data.Repository
         // TODO: use unit of work instead to save changes
         public int Add(VISITORS visitor)
         {
-            try
-            {
-                _dbSet.Add(visitor);
-                return _db.SaveChanges();
-            }
-            catch (Exception)
-            {
-                return 0;
-            }
+            _dbSet.Add(visitor);
+            return _db.SaveChanges();
         }
 
         // TODO: use unit of work instead to save changes
