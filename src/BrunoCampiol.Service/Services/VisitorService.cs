@@ -129,7 +129,6 @@ namespace BrunoCampiol.Domain.Services
             return ip.ToString();
         }
 
-        // TODO: change to IPaddress object instead
         //public VISITORS GetVisitorInformation(string ipAddress)
         //{
         //    if (string.IsNullOrWhiteSpace(ipAddress)) throw new ArgumentException("Cannot be null, empty or white-space", nameof(ipAddress));
@@ -146,9 +145,6 @@ namespace BrunoCampiol.Domain.Services
         //    if (httpResponse.StatusCode != HttpStatusCode.OK) return null;
 
         //    JObject jobject = JObject.Parse(httpResponse.Content.ReadAsStringAsync().Result);
-
-        //    // TODO: check for invalid responses here
-        //    // TODO: change to automapper or similar
 
         //    VISITORS visitor = new VISITORS();
         //    visitor.CITY = jobject.GetValue("city", StringComparison.OrdinalIgnoreCase)?.Value<string>();
@@ -177,9 +173,6 @@ namespace BrunoCampiol.Domain.Services
         //    if (httpResponse.StatusCode != HttpStatusCode.OK) return null;
 
         //    JObject jobject = JObject.Parse(await httpResponse.Content.ReadAsStringAsync());
-
-        //    // TODO: check for invalid responses here
-        //    // TODO: change to automapper or similar
 
         //    VISITORS visitor = new VISITORS();
         //    visitor.CITY = jobject.GetValue("city", StringComparison.OrdinalIgnoreCase)?.Value<string>();
