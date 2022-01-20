@@ -1,0 +1,33 @@
+﻿@page
+@model BrunoCampiol.UI.Web.Pages.PostsModel
+@{
+    ViewData["Title"] = "Posts";
+}
+
+<h1 class="responsive-title text-center">Let your comment below</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label for="postComments">Let me know your thoughts</label>
+        <textarea class="form-control" id="postComments" name="postComments" rows="3"></textarea>
+    </div>
+    <button type="submit" class="btn btn-secondary mb-2">Post</button>
+</form>
+
+<h1 class="responsive-title text-center">See other posts here...</h1>
+
+@if (Model.PostList.Count > 0)
+{
+    foreach (var post in Model.PostList)
+    {
+        <div class="media">
+            <img class="align-self-start mr-3" src="https://via.placeholder.com/50" alt="..." />
+            <div class="media-body">
+                <h5 class="mt-0 mb-0">@post.USER_NAME</h5>
+                <small class="d-block mb-1">@post.CREATED_ON_UTC</small>
+                @post.USER_POST
+            </div>
+        </div>
+        <br />
+    }
+}

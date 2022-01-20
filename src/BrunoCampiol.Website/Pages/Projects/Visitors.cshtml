@@ -1,0 +1,122 @@
+﻿@page "{handler?}/{id?}"
+@model BrunoCampiol.UI.Web.Pages.Projects.VisitorsModel
+
+<link rel="stylesheet" href="~/lib/flag-icon-css/css/flag-icon.min.css" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+<h1 class="responsive-title text-center">Visitors <i class="fas fa-history"></i></h1>
+
+<br />
+
+@*
+    <canvas id="myChart" height="100px"></canvas>
+
+    @Html.Raw(Model.pieDataScript)
+
+    <script>
+        // The "use strict" directive was new in ECMAScript version 5.
+        // It is not a statement, but a literal expression, ignored by earlier versions of JavaScript.
+        // The purpose of "use strict" is to indicate that the code should be executed in "strict mode".
+        // With strict mode, you can not, for example, use undeclared variables.
+        'use strict';
+
+        // Checks if jquery has been loaded
+        if (!window.jQuery) {
+            throw new Error('Jquery is required');
+        }
+
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'pie',
+            // The data for our dataset
+            data: {
+                labels: countryLabels,
+                datasets: [{
+                    label: "My First dataset",
+                    backgroundColor: countryColors,
+                    borderColor: countryColors,
+                    data: countrySum,
+                }]
+            },
+
+            // Configuration options go here
+            options: {}
+        });
+    </script>
+*@
+
+
+@*https://getbootstrap.com/docs/4.0/utilities/display/#hiding-elements*@
+
+<div class="bg-light visitor-list">
+    <div class="row p-2">
+        <div class="col-3 text-center ellipsis responsive-table-text-visitors">
+            <strong>IP</strong>
+        </div>
+        <div class="col-1 text-center ellipsis responsive-table-text-visitors">
+            <i class="far fa-flag"></i>
+        </div>
+        <div class="col-2 text-center ellipsis responsive-table-text-visitors">
+            <strong>Date</strong>
+        </div>
+        <div class="col-1 text-center ellipsis responsive-table-text-visitors">
+            <strong>Client</strong>
+        </div>
+        <div class="col-5 ellipsis responsive-table-text-visitors">
+            <strong>Region - City</strong>
+        </div>
+    </div>
+    @Html.Raw(Model.visitorListString)
+    <div class="next" style="height:30px;"></div>
+</div>
+
+
+<script>
+    // The "use strict" directive was new in ECMAScript version 5.
+    // It is not a statement, but a literal expression, ignored by earlier versions of JavaScript.
+    // The purpose of "use strict" is to indicate that the code should be executed in "strict mode".
+    // With strict mode, you can not, for example, use undeclared variables.
+    'use strict';
+
+    // Checks if jquery has been loaded
+    if (!window.jQuery) {
+        throw new Error('Jquery is required');
+    }
+
+    function isOnScreen(element) {
+        var win = $(window);
+        var screenTop = win.scrollTop();
+        var screenBottom = screenTop + win.height();
+
+        var elementTop = element.offset().top;
+        var elementBottom = elementTop + element.height();
+
+        return elementBottom > screenTop && elementTop < screenBottom;
+    }
+
+    // A page can't be manipulated safely until the document is "ready."
+    // Shorthand for $(document).ready()
+    $(function () {
+        let loading = false;
+        let currentPage = 2;
+        $(document).on("scroll", function () {
+            if (loading == false) {
+                if (isOnScreen($(".next"))) {
+                    loading = true;
+                    $(".next").remove();
+                    $.ajax({
+                        url: "./Visitors/Row/" + currentPage,
+                        method: "GET"
+                    }).done(function (res) {
+                        $(".visitor-list").append(res);
+                        currentPage++;
+                        loading = false;
+                    });
+                }
+            }
+        });
+    });
+</script>
+

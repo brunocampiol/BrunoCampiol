@@ -1,0 +1,53 @@
+﻿@page
+@model BrunoCampiol.UI.Web.Pages.Identity.IndexModel
+
+@if (Model.IsAuthenticated)
+{
+    <h1 class="responsive-title text-center">My LogIn Information</h1>
+    <br />
+    <h2 class="responsive-subtitle">
+        <i class="fas fa-user"></i> @Model.Name
+    </h2>
+    <h2 class="responsive-subtitle">
+        <i class="fas fa-passport"></i> @Model.Provider
+    </h2>
+    <br />
+    <a class="btn btn-secondary" asp-page="/Identity/SignOut">Sign Out</a>
+}
+else
+{
+    <script>
+        if (location.protocol != 'https:') {
+            //if (location.hostname.toLowerCase().indexOf('brunocampiol.com') >= 0)
+            if (location.hostname.toLowerCase() != 'localhost') {
+                location.href = 'https://brunocampiol.com/Identity';
+            }
+        }
+    </script>
+
+    <h1 class="responsive-title text-center">Sign In <i class="fas fa-user"></i></h1>
+
+    <br />
+
+    <div class="alert alert-primary" role="alert">
+        <strong>Hey! Want to comment out in my page? </strong>
+        <br />
+        Please login with your social media account and you will be able to post stuff.
+        <br />
+        Don't worry, I will not have access to your account.
+    </div>
+
+    <br />
+
+    <div class="row text-center">
+        <div class="col-sm">
+            <a class="btn m-3 text-white" style="background-color:#00acee;" asp-page="/Identity/SignIn" asp-route-provider="Twitter">Twitter <i class="fab fa-twitter-square"></i></a>
+        </div>
+        <div class="col-sm">
+            <a class="btn m-3 text-white" style="background-color:#333;" asp-page="/Identity/SignIn" asp-route-provider="GitHub">Git Hub <i class="fab fa-github-square"></i></a>
+        </div>
+        <div class="col-sm">
+            <a class="btn m-3 text-white" style="background-color:#3b5998;" asp-page="/Identity/SignIn" asp-route-provider="Facebook">Facebook <i class="fab fa-facebook-square"></i></a>
+        </div>
+    </div>
+} 
