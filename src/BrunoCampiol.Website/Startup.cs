@@ -27,7 +27,10 @@ namespace BrunoCampiol.UI.Web
             //{
             //    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             //});
-            services.AddRazorPages();
+
+            // Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
+            services.AddRazorPages()
+                    .AddRazorRuntimeCompilation(); // TODO: remove for PROD
 
             // Setting DBContexts
             services.AddDatabaseConfiguration(_configuration);
