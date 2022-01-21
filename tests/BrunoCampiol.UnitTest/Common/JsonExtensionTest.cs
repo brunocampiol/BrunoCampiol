@@ -7,11 +7,6 @@ namespace BrunoCampiol.Unit.Test.Common
 {
     public class JsonExtensionTest
     {
-        public JsonExtensionTest()
-        {
-
-        }
-
         [Fact]
         public void WhenInlineObject_ExpectEqualJson()
         {

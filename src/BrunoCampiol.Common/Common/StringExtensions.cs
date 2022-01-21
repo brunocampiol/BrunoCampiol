@@ -1,31 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Humanizer;
+using System;
 
 namespace BrunoCampiol.CrossCutting.Common.Common
 {
-    public static class Extensions
+    public static class StringExtensions
     {
-        /// <summary>
-        /// Retrieves all exceptions messages from an exception and its inner exceptions
-        /// </summary>
-        /// <param name="ex">The exception to retrieve messages</param>
-        /// <param name="message">Optional information to add before the message</param>
-        /// <returns>String with all exceptions messages from exception and its inner exceptions</returns>
-        public static string AllExceptionMessages(this Exception ex, string message = "(Exception): ")
-        {
-            StringBuilder sb = new StringBuilder();
-
-            sb.Append(message + ex.Message);
-
-            if (ex.InnerException != null)
-            {
-                sb.Append(ex.InnerException.AllExceptionMessages(" (InnerException): "));
-            }
-
-            return sb.ToString();
-        }
-
         /// <summary>
         /// Truncates the string to a specified length
         /// </summary>
@@ -65,7 +44,17 @@ namespace BrunoCampiol.CrossCutting.Common.Common
         /// <returns></returns>
         public static string ToTimeAgo(this DateTime dateTime)
         {
-            return StaticLibrary.ToTimeAgo(dateTime, DateTime.UtcNow);
+            return dateTime.Humanize();
         }
+
+        ///// <summary>
+        ///// Gives in english language how much time the DateTime spent from now
+        ///// </summary>
+        ///// <param name="dateTime">In UTC!</param>
+        ///// <returns></returns>
+        //public static string ToTimeAgo(this DateTime dateTime)
+        //{
+        //    return StaticLibrary.ToTimeAgo(dateTime, DateTime.UtcNow);
+        //}
     }
 }

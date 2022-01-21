@@ -4,24 +4,8 @@ using Xunit;
 
 namespace BrunoCampiol.Unit.Test.Common
 {
-    public class ExtensionsTest
+    public class StringExtensionsTest
     {
-        [Fact]
-        public void TestAllExceptionMessages()
-        {
-            // Assemble
-            Exception innerInnerException = new Exception("Inner Inner Exception Message");
-            Exception innerException = new Exception("Inner Exception Message", innerInnerException);
-            Exception exception = new Exception("Exception Message", innerException);
-            string expectedMessage = "(Exception): Exception Message (InnerException): Inner Exception Message (InnerException): Inner Inner Exception Message";
-
-            // Act
-            string actualMessage = exception.AllExceptionMessages();
-
-            // Assert
-            Assert.Equal(expectedMessage, actualMessage);
-        }
-
         [Fact]
         public void TestTruncate_ExpectTruncatedString_WhenValidString()
         {
@@ -67,8 +51,8 @@ namespace BrunoCampiol.Unit.Test.Common
         public void TestToTimeAgo_ExpectNoErrors_WhenCalled()
         {
             // Assemble
-            DateTime dateTime = DateTime.Now;
-           
+            DateTime dateTime = DateTime.UtcNow.AddHours(-3);
+
             // Act
             string returnedString = dateTime.ToTimeAgo();
 
@@ -76,6 +60,7 @@ namespace BrunoCampiol.Unit.Test.Common
             Assert.False(String.IsNullOrEmpty(returnedString));
             Assert.False(String.IsNullOrWhiteSpace(returnedString));
             Assert.True(returnedString.Length > 0);
+            Assert.True(returnedString.Contains('3'));
         }
     }
 }
