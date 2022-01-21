@@ -1,49 +1,26 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Serialization;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
+using System.Text.Json;
 
 namespace BrunoCampiol.CrossCutting.Common.Common
 {
     public static class JsonExtension
     {
-        public static JsonSerializerSettings JsonSettings
+        public static string ToJson(this object objToJson)
         {
-            get
-            {
-                return new JsonSerializerSettings
-                {
-                    Formatting = Formatting.None,
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                    ContractResolver = new CamelCasePropertyNamesContractResolver(),
-                    //NullValueHandling = NullValueHandling.Ignore,
-                    //DefaultValueHandling = DefaultValueHandling.Ignore,
-                    MissingMemberHandling = MissingMemberHandling.Ignore,
-                    FloatFormatHandling = FloatFormatHandling.DefaultValue,
-                    FloatParseHandling = FloatParseHandling.Decimal,
-                    DateFormatHandling = DateFormatHandling.IsoDateFormat,
-                    Converters = new[] { new IsoDateTimeConverter { DateTimeStyles = System.Globalization.DateTimeStyles.AssumeLocal } }
-                };
-            }
+            return JsonSerializer.Serialize(objToJson);
         }
 
-        public static string ToJson(this object objToJson, bool useSettings = false)
+        public static T ToObject<T>(this string jsonStringToObject)
         {
-            if (useSettings)
-            {
-                return JsonConvert.SerializeObject(objToJson, JsonSettings);
-            }
 
-            return JsonConvert.SerializeObject(objToJson);
+            return JsonSerializer.Deserialize<T>(jsonStringToObject);
         }
 
-        public static (bool IsParseOK, string ParseValue, string ErrorMessage) TryParseToJson(this object objToJson, bool useSettings = false)
+        public static (bool IsParseOK, T ParseValue, string ErrorMessage) TryParseToObject<T>(this string jsonStringToObject)
         {
             try
             {
-                return (true, objToJson.ToJson(useSettings), default);
+                return (true, JsonSerializer.Deserialize<T>(jsonStringToObject), string.Empty);
             }
             catch (Exception ex)
             {
@@ -51,26 +28,18 @@ namespace BrunoCampiol.CrossCutting.Common.Common
             }
         }
 
-        public static T ToObject<T>(this string stringToObject, bool useSettings = false)
-        {
-            if (useSettings)
-            {
-                return JsonConvert.DeserializeObject<T>(stringToObject, JsonSettings);
-            }
-
-            return JsonConvert.DeserializeObject<T>(stringToObject);
-        }
-
-        public static (bool IsParseOK, T ParseValue, string ErrorMessage) TryParseToObject<T>(this string stringToObject, bool useSettings = false)
-        {
-            try
-            {
-                return (true, stringToObject.ToObject<T>(useSettings), string.Empty);
-            }
-            catch (Exception ex)
-            {
-                return (false, default, ex.AllExceptionMessages());
-            }
-        }
+        //        return new JsonSerializerSettings
+        //        {
+        //            //NullValueHandling = NullValueHandling.Ignore,
+        //            //DefaultValueHandling = DefaultValueHandling.Ignore,
+        //            Formatting = Formatting.None,
+        //            ContractResolver = new CamelCasePropertyNamesContractResolver(),
+        //            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+        //            MissingMemberHandling = MissingMemberHandling.Ignore,
+        //            FloatFormatHandling = FloatFormatHandling.DefaultValue,
+        //            FloatParseHandling = FloatParseHandling.Decimal,
+        //            DateFormatHandling = DateFormatHandling.IsoDateFormat,
+        //            Converters = new[] { new IsoDateTimeConverter { DateTimeStyles = System.Globalization.DateTimeStyles.AssumeLocal } }
+        //        };
     }
 }
