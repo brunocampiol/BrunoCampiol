@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
+using System.Text;
 
 namespace BrunoCampiol.UI.Web.Pages.Projects
 {
@@ -46,33 +46,32 @@ namespace BrunoCampiol.UI.Web.Pages.Projects
 
         private string GetVisitorListAsHtml(List<VisitorViewModel> visitorList)
         {
-            // TODO use string builder
-            string rows = String.Empty;
+            StringBuilder sb = new StringBuilder();
 
             foreach (VisitorViewModel visitor in visitorList)
             {
-                rows += "<div class=\"row visitor-text\">";
-                rows += "<div class=\"col-3 ellipsis text-center responsive-table-text-visitors\">";
-                rows += visitor.Ip;
-                rows += "</div>";
-                rows += "<div class=\"col-1 ellipsis text-center responsive-table-text-visitors\">";
-                rows += " <span class=\"flag-icon flag-icon-" + visitor.Country.ToLower() + "\"></span>";
-                rows += "</div>";
-                rows += "<div class=\"col-2 ellipsis  text-center responsive-table-text-visitors\">";
-                rows += visitor.CreatedUtc.ToTimeAgo();
-                rows += "</div>";
-                rows += "<div class=\"col-1 ellipsis text-center responsive-table-text-visitors\">";
-                rows += GetOSIcon(visitor.ClientOS);
-                rows += "  ";
-                rows += GetBrowserIcon(visitor.ClientBrowser);
-                rows += "</div>";
-                rows += "<div class=\"col-5 ellipsis responsive-table-text-visitors\">";
-                rows += visitor.Region + " - " + visitor.City;
-                rows += "</div>";
-                rows += "</div>";
+                sb.Append("<div class=\"row visitor-text\">");
+                sb.Append("<div class=\"col-3 ellipsis text-center responsive-table-text-visitors\">");
+                sb.Append(visitor.Ip);
+                sb.Append("</div>");
+                sb.Append("<div class=\"col-1 ellipsis text-center responsive-table-text-visitors\">");
+                sb.Append(" <span class=\"flag-icon flag-icon-" + visitor.Country.ToLower() + "\"></span>");
+                sb.Append("</div>");
+                sb.Append("<div class=\"col-2 ellipsis  text-center responsive-table-text-visitors\">");
+                sb.Append(visitor.CreatedUtc.ToTimeAgo());
+                sb.Append("</div>");
+                sb.Append("<div class=\"col-1 ellipsis text-center responsive-table-text-visitors\">");
+                sb.Append(GetOSIcon(visitor.ClientOS));
+                sb.Append("  ");
+                sb.Append(GetBrowserIcon(visitor.ClientBrowser));
+                sb.Append("</div>");
+                sb.Append("<div class=\"col-5 ellipsis responsive-table-text-visitors\">");
+                sb.Append(visitor.Region + " - " + visitor.City);
+                sb.Append("</div>");
+                sb.Append("</div>");
             }
 
-            return rows;
+            return sb.ToString();
         }
 
         private List<VisitorViewModel> GetVisitorList(int page, int pageSize)
