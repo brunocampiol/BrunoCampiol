@@ -1,5 +1,6 @@
 ﻿using BrunoCampiol.Domain.Core.Interfaces;
 using BrunoCampiol.Domain.Core.Notifications;
+using BrunoCampiol.Services.Api.Middleware;
 
 namespace BrunoCampiol.Services.Api
 {
@@ -32,6 +33,8 @@ namespace BrunoCampiol.Services.Api
         {
             if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
+            app.UseMiddleware<ExceptionMiddleware>();
+
             // Healthcheck
             //app.UseAppHealthChecks();
 
@@ -40,7 +43,6 @@ namespace BrunoCampiol.Services.Api
 
             // Use wwwroot folder
             app.UseStaticFiles();
-
         }
     }
 }
