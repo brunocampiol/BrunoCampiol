@@ -1,5 +1,6 @@
 ﻿using BrunoCampiol.Domain.Core.Interfaces;
 using BrunoCampiol.Domain.Core.Notifications;
+using BrunoCampiol.Services.Api.Configurations.HealthCheck;
 using BrunoCampiol.Services.Api.Middleware;
 
 namespace BrunoCampiol.Services.Api
@@ -35,7 +36,7 @@ namespace BrunoCampiol.Services.Api
             //services.AddSwaggerSetup();
 
             // Healthcheck
-            //services.AddHealthCheckSetup();
+            services.AddHealthCheckSetup();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -52,7 +53,7 @@ namespace BrunoCampiol.Services.Api
             });
 
             // Healthcheck
-            //app.UseAppHealthChecks();
+            app.UseAppHealthChecks();
 
             // Swagger
             app.UseSwagger();
