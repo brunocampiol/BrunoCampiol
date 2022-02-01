@@ -22,6 +22,15 @@ namespace BrunoCampiol.Services.Api
             services.AddHttpClient();
 
             services.AddScoped<IHandler<DomainNotification>, DomainNotificationHandler>();
+
+            // Controllers
+            services.AddControllers();
+            services.AddRouting();
+
+            // Swagger
+            services.AddEndpointsApiExplorer();
+            services.AddSwaggerGen();
+
             // Swagger
             //services.AddSwaggerSetup();
 
@@ -35,10 +44,19 @@ namespace BrunoCampiol.Services.Api
 
             app.UseMiddleware<ExceptionMiddleware>();
 
+            // Routing 
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+
             // Healthcheck
             //app.UseAppHealthChecks();
 
             // Swagger
+            app.UseSwagger();
+            app.UseSwaggerUI();
             //app.UseSwaggerApp();
 
             // Use wwwroot folder
