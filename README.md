@@ -1,5 +1,7 @@
 # Bruno Campiol
 
+This project has been archived
+
 Small project for personal web page.
 
 ## Project Build
